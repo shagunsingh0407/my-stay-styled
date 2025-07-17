@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stay Styled</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght%40400%3B600%3B700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F4FA; /* Very light lavender for the overall background */
+            color: #332244; /* Dark purple-grey for main text */
+        }
+        /* Custom styles for hidden sections */
+        .hidden-section {
+            display: none;
+        }
+        /* Style for active filter button */
+        .filter-button.active {
+            background-color: #A98CD7; /* Light vibrant lavender for active state */
+            color: white;
+            border-color: #A98CD7;
+        }
+        /* Basic hover effect for collection items */
+        .collection-item {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .collection-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08); /* Slightly less intense shadow */
+        }
+        /* Override Tailwind's default placeholder image colors for consistency */
+        img[src*="via.placeholder.com"] {
+            background-color: #F0E8F8; /* Very light lavender for placeholder background */
+            color: #9988AA; /* Muted purple-grey for placeholder text */
+        }
+        /* Search bar styling */
+        .search-bar-container {
+            position: relative;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 0.75rem 1.25rem;
+            padding-right: 3rem; /* Space for icon */
+            border: 1px solid #E0D0EE; /* Lighter lavender border */
+            border-radius: 9999px; /* Fully rounded */
+            background-color: #FFFFFF; /* White background for search input */
+            color: #332244;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); /* Lighter shadow */
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: #A98CD7; /* Accent lavender on focus */
+            box-shadow: 0 0 0 3px rgba(169, 140, 215, 0.2); /* Soft lavender focus ring */
+        }
+        .search-icon {
+            position: absolute;
+            right: 1.25rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #7B62A3; /* Medium-dark lavender */
+            pointer-events: none; /* Make icon unclickable */
+        }
+        /* Pagination button styling */
+        .pagination-button {
+            background-color: #F0E8F8; /* Very light lavender */
+            color: #705E82; /* Softer dark purple-grey */
+            border: 1px solid #A98CD7; /* Light vibrant lavender border */
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
+        .pagination-button:hover {
+            background-color: #E0D0EE; /* Slightly darker light lavender */
+            color: #332244;
+        }
+        .pagination-button.active {
+            background-color: #A98CD7; /* Light vibrant lavender */
+            color: white;
+            border-color: #A98CD7;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+
+    <div class="bg-gray-800 text-white text-xs py-2 px-4 flex justify-between items-center flex-wrap">
+        <div class="flex space-x-3">
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-facebook"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-pinterest"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-whatsapp"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-telegram-plane"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-snapchat"></i></a>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-twitter"></i></a> </div>
+        <p class="hidden md:block">1 Million+ Squad, Outfits for Every Mood!</p>
+        <button class="bg-[#A98CD7] hover:bg-[#5E3D80] text-white py-1 px-3 rounded-full text-xs">
+            <i class="fa-solid fa-download"></i> DOWNLOAD APP
+        </button>
+    </div>
+
+    <header class="bg-[#7B62A3] text-white p-4 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <img src="images/stay_styled_logo.png" alt="Stay Styled Logo" class="max-h-24">
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a id="home-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out">Home</a></li>
+                    <li><a id="features-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out">Features</a></li>
+                    <li><a id="about-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out">About</a></li>
+                    <li><a id="contact-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out">Contact</a></li>
+                    <li><a id="account-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-user"></i> Account</a></li>
+                    <li><a id="search-link" href="#product-search" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-search"></i> Search</a></li>
+                    <li><a id="cart-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cart-count">0</span>)</a></li>
+                    <li><a id="wishlist-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-heart"></i> Wishlist (<span id="wishlist-count">0</span>)</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto p-6">
+        <section id="home-section" class="bg-white rounded-xl shadow-xl p-8 mb-10">
+            <div class="text-center transform transition duration-500 hover:scale-105 mb-12">
+                <h2 class="text-5xl font-extrabold text-[#5E3D80] mb-4">Welcome to Stay Styled!</h2>
+                <p class="text-xl text-[#705E82] mb-6 max-w-3xl mx-auto">
+                    If you're a Pinterest enthusiast looking to recreate every dream outfit, then congratulations!
+                    You've found your ultimate destination to make those fashion dreams a reality.
+                </p>
+                <button id="explore-collections-btn" class="bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                    Explore Collections
+                </button>
+            </div>
+
+            <div class="mb-12">
+                <h3 class="text-4xl font-extrabold text-[#5E3D80] mb-8 text-center">Our Top Picks</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-[#F7F4FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="https://via.placeholder.com/300x200/F0E8F8/9988AA?text=Summer+Vibes" alt="Summer Vibes Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <h4 class="text-2xl font-semibold text-[#705E82] mb-2">Summer Vibes Collection</h4>
+                        <p class="text-[#9988AA] text-center">Light fabrics and vibrant colors for a perfect summer.</p>
+                    </div>
+                    <div class="bg-[#F7F4FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="https://via.placeholder.com/300x200/F0E8F8/9988AA?text=Cozy+Essentials" alt="Cozy Essentials Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <h4 class="text-2xl font-semibold text-[#705E82] mb-2">Cozy Essentials</h4>
+                        <p class="text-[#9988AA] text-center">Comfort meets style with our softest autumn collection.</p>
+                    </div>
+                    <div class="bg-[#F7F4FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="https://via.placeholder.com/300x200/F0E8F8/9988AA?text=Evening+Glam" alt="Evening Glam Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <h4 class="text-2xl font-semibold text-[#705E82] mb-2">Evening Glam</h4>
+                        <p class="text-[#9988AA] text-center">Dazzle at any event with our elegant evening wear.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-4xl font-extrabold text-[#5E3D80] mb-8 text-center">Our Full Collection</h3>
+
+                <div class="search-bar-container">
+                    <input type="text" id="product-search" class="search-input" placeholder="Search for items...">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </div>
+
+                <div class="flex justify-center space-x-4 mb-8 flex-wrap">
+                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE] active" data-category="all">All</button>
+                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="dresses">Dresses</button>
+                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="tops">Tops</button>
+                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="bottoms">Bottoms</button>
+                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="accessories">Accessories</button>
+                </div>
+
+                <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                    </div>
+
+                <div id="pagination-controls" class="flex justify-center space-x-2 mt-8">
+                    </div>
+            </div>
+        </section>
+
+        <section id="cart-section" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-4xl mx-auto">
+            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">Your Shopping Cart</h2>
+            <div id="cart-items" class="space-y-4">
+                <p id="empty-cart-message" class="text-center text-[#705E82]">Your cart is empty.</p>
+            </div>
+            <div id="cart-summary" class="mt-8 pt-4 border-t border-[#E0D0EE] text-right">
+                <p class="text-xl font-bold text-[#4A3A5A]">Total: ₹<span id="cart-total">0</span></p>
+                <button class="mt-4 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out">Proceed to Checkout</button>
+            </div>
+            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+                Continue Shopping
+            </button>
+        </section>
+
+        <section id="wishlist-section" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-4xl mx-auto">
+            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">Your Wishlist</h2>
+            <div id="wishlist-items" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <p id="empty-wishlist-message" class="text-center text-[#705E82] col-span-full">Your wishlist is empty.</p>
+            </div>
+            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+                Continue Shopping
+            </button>
+        </section>
+
+        <section id="features-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-4xl mx-auto">
+            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">Our Amazing Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#705E82]">
+                <div>
+                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Exclusive Collections</h3>
+                    <p>Discover unique and curated fashion collections that you won't find anywhere else. We partner with emerging designers to bring you the latest trends.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Personalized Styling</h3>
+                    <p>Get personalized style recommendations based on your preferences and body type. Our AI-powered stylist helps you find your perfect look.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Sustainable Fashion</h3>
+                    <p>We are committed to ethical sourcing and sustainable practices. Shop guilt-free knowing your clothes are made with care for the planet.</p>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Fast & Free Shipping</h3>
+                    <p>Enjoy quick and reliable shipping on all orders, with free shipping for purchases over a certain amount. Your style, delivered fast.</p>
+                </div>
+            </div>
+            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+                Close
+            </button>
+        </section>
+
+        <section id="about-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-3xl mx-auto">
+            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">About Stay Styled</h2>
+            <p class="text-lg text-[#705E82] mb-4">
+                Stay Styled was founded in 2020 with a vision to make high-fashion accessible to everyone.
+                We believe that style is a form of self-expression and should be celebrated by all.
+            </p>
+            <p class="text-lg text-[#705E82] mb-4">
+                Our mission is to provide a seamless shopping experience, offering a diverse range of clothing
+                and accessories that empower individuals to embrace their unique style.
+            </p>
+            <p class="text-lg text-[#705E82]">
+                We are a passionate team dedicated to bringing you quality, trend-setting pieces
+                and exceptional customer service.
+            </p>
+
+            <div id="founders-section" class="mt-10 pt-8 border-t border-[#E0D0EE]">
+                <h3 class="text-3xl font-extrabold text-[#5E3D80] mb-6 text-center">Meet Our Founder</h3>
+                <div class="flex flex-col md:flex-row items-center md:space-x-8">
+                    <div class="md:w-1/3 mb-6 md:mb-0">
+                        <img src="https://via.placeholder.com/200x200/F0E8F8/9988AA?text=Your+Picture" alt="Your Name" class="rounded-full w-48 h-48 object-cover mx-auto shadow-md">
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h4 class="text-2xl font-semibold text-[#4A3A5A] mb-2"> [Your Name Here]</h4>
+                        <p class="text-lg text-[#705E82] mb-3">**Founder & CEO**</p>
+                        <p class="text-[#705E82]">
+                            [Your Name] envisioned Stay Styled as a platform to bridge the gap between aspirational fashion and everyday accessibility. With a keen eye for trends and a passion for empowering individuals through style, [Your Name] leads the brand's creative direction and commitment to customer satisfaction. [Add a short bio about yourself, your vision, or what inspired you to start this.]
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+                Close
+            </button>
+        </section>
+
+        <section id="contact-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-2xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4">Get in Touch!</h2>
+            <p class="text-lg text-[#705E82] mb-4">
+                We'd love to hear from you. Here's how you can reach us:
+            </p>
+            <ul class="list-none p-0 m-0 text-[#705E82] text-xl space-y-3">
+                <li><strong>Email:</strong> info@staystyled.com</li>
+                <li><strong>Phone:</strong> +1 (555) 123-4567</li>
+                <li><strong>Address:</strong> 123 Fashion Lane, Style City, ST 98765</li>
+            </ul>
+            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+                Close
+            </button>
+        </section>
+    </main>
+
+    <footer class="bg-[#7B62A3] text-white p-6 mt-10 shadow-inner">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-[#A98CD7]">
+                <div>
+                    <h4 class="font-bold text-lg mb-4">HELP</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:underline">Client Advisor: 1800 103 9988</a></li>
+                        <li><a href="#" class="hover:underline">Chat or Email Us</a></li>
+                        <li><a href="#" class="hover:underline">FAQ</a></li>
+                        <li><a href="#" class="hover:underline">Product Care</a></li>
+                        <li><a href="#" class="hover:underline">Stores</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">SHOP</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:underline">New Arrivals</a></li>
+                        <li><a href="#collection-grid" class="hover:underline">Dresses</a></li>
+                        <li><a href="#collection-grid" class="hover:underline">Tops</a></li>
+                        <li><a href="#collection-grid" class="hover:underline">Bottoms</a></li>
+                        <li><a href="#collection-grid" class="hover:underline">Accessories</a></li>
+                        <li><a href="#" class="hover:underline">Flats & Platforms</a></li>
+                        <li><a href="#" class="hover:underline">T-Shirts</a></li>
+                        <li><a href="#" class="hover:underline">Trousers</a></li>
+                        <li><a href="#" class="hover:underline">Oxfords & Boots</a></li>
+                        <li><a href="#" class="hover:underline">Heels & Platforms</a></li>
+                        <li><a href="#" class="hover:underline">Matching Sets</a></li>
+                        <li><a href="#" class="hover:underline">Best Selling</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">SUPPORT & SERVICES</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:underline">Exchanges</a></li>
+                        <li><a href="#" class="hover:underline">Exchange Policy</a></li>
+                        <li><a href="#" class="hover:underline">Repairs</a></li>
+                        <li><a href="#" class="hover:underline">Personalisation</a></li>
+                        <li><a href="#" class="hover:underline">Art of Gifting</a></li>
+                        <li><a href="#" class="hover:underline">Shipping</a></li>
+                        <li><a href="#" class="hover:underline">Download our App</a></li>
+                        <li><a href="#" class="hover:underline">Support</a></li>
+                        <li><a href="#" class="hover:underline">Privacy Policy</a></li>
+                        <li><a href="#" class="hover:underline">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">ABOUT STAY STYLED</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a id="footer-about-link" href="#" class="hover:underline">Our Story</a></li>
+                        <li><a id="footer-features-link" href="#" class="hover:underline">Features</a></li>
+                        <li><a href="#" class="hover:underline">Sustainability</a></li>
+                        <li><a href="#" class="hover:underline">Latest News</a></li>
+                        <li><a href="#" class="hover:underline">Careers</a></li>
+                        <li><a id="footer-founders-link" href="#" class="hover:underline">Founders</a></li> </ul>
+                    <h4 class="font-bold text-lg mt-6 mb-4">CONNECT</h4>
+                    <p class="text-sm mb-4">Sign up for our emails to get the latest news, exclusive launches, and collections.</p>
+                    <button class="bg-[#A98CD7] hover:bg-[#5E3D80] text-white font-bold py-2 px-4 rounded-full text-xs transition duration-300">Sign Up for Emails</button>
+                    <div class="mt-4">
+                        <h5 class="font-semibold text-sm mb-2">Follow Us:</h5>
+                        <div class="flex space-x-3 text-xl">
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-facebook"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-youtube"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-pinterest"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-whatsapp"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-telegram-plane"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-snapchat"></i></a>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-twitter"></i></a> </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center text-xs space-y-2 pt-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <h5 class="font-bold mb-1">Full Name and Address of the Manufacturer:</h5>
+                        <p>Stay Styled Global Fashions Pvt Ltd</p>
+                        <p>123 Fashion Lane, Style City, ST 98765, INDIA</p>
+                        <p>Please refer to the product label for specific country of origin for each product.</p>
+                    </div>
+                    <div>
+                        <h5 class="font-bold mb-1">Full Name and Address of the Importer (if different):</h5>
+                        <p>Stay Styled India Retail Private Limited</p>
+                        <p>Shop 101, Trendsetter Tower, Fashion Street, Gurgaon, Haryana - 122002, INDIA</p>
+                    </div>
+                </div>
+                <p class="mt-4">&copy; 2025 Stay Styled. All rights reserved.</p>
+                <div class="flex justify-center space-x-4 mt-2">
+                    <a href="#" class="hover:text-gray-200 transition duration-300">Privacy Policy</a>
+                    <a href="#" class="hover:text-gray-200 transition duration-300">Terms of Service</a>
+                    <a href="#" class="hover:text-gray-200 transition duration-300">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const ITEMS_PER_PAGE = 30; // Define how many items per page
+        let currentPage = 1; // Start on the first page
+
+        // Centralized Product Data (placeholder generation)
+        const allProducts = [];
+
+        // Function to generate dummy products for demonstration
+        function generateDummyProducts(category, count, startPrice, priceRange) {
+            for (let i = 1; i <= count; i++) {
+                const idPrefix = category.charAt(0);
+                allProducts.push({
+                    id: `${idPrefix}-${i}`,
+                    name: `${category.charAt(0).toUpperCase() + category.slice(1)} Item ${i}`,
+                    description: `A stylish ${category} for all occasions.`,
+                    price: Math.floor(Math.random() * priceRange) + startPrice,
+                    category: category,
+                    imageUrl: `https://via.placeholder.com/300x250/F0E8F8/9988AA?text=${category}+${i}`
+                });
+            }
+        }
+
+        // Generate 50+ items for each category
+        generateDummyProducts('dresses', 55, 1500, 1000);
+        generateDummyProducts('tops', 60, 800, 700);
+        generateDummyProducts('bottoms', 52, 1200, 800);
+        generateDummyProducts('accessories', 58, 300, 1000);
+
+        // Shuffle the products array once on load for random display
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+        shuffleArray(allProducts);
+
+        // Get references to DOM elements
+        const navLinks = document.querySelectorAll('nav a');
+        const contentSections = document.querySelectorAll('main section');
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const collectionGrid = document.getElementById('collection-grid');
+        const productSearchInput = document.getElementById('product-search');
+        const exploreCollectionsBtn = document.getElementById('explore-collections-btn');
+
+        // Cart and Wishlist elements
+        const cartCountSpan = document.getElementById('cart-count');
+        const wishlistCountSpan = document.getElementById('wishlist-count');
+        const cartItemsDiv = document.getElementById('cart-items');
+        const wishlistItemsDiv = document.getElementById('wishlist-items');
+        const cartTotalSpan = document.getElementById('cart-total');
+        const emptyCartMessage = document.getElementById('empty-cart-message');
+        const emptyWishlistMessage = document.getElementById('empty-wishlist-message');
+        const paginationControls = document.getElementById('pagination-controls');
+
+        // New footer links
+        const footerAboutLink = document.getElementById('footer-about-link');
+        const footerFeaturesLink = document.getElementById('footer-features-link');
+        const footerFoundersLink = document.getElementById('footer-founders-link');
+
+
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        // --- Core Functions ---
+
+        function hideAllSections() {
+            contentSections.forEach(section => {
+                section.classList.add('hidden-section');
+            });
+        }
+
+        function renderProducts(productsToDisplay) {
+            collectionGrid.innerHTML = '';
+            if (productsToDisplay.length === 0) {
+                collectionGrid.innerHTML = '<p class="text-center text-[#705E82] col-span-full">No items found matching your criteria.</p>';
+                return;
+            }
+
+            productsToDisplay.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('collection-item', 'bg-white', 'rounded-lg', 'p-4', 'shadow-sm', 'border', 'border-[#E0D0EE]');
+                productCard.setAttribute('data-category', product.category);
+                productCard.setAttribute('data-name', product.name.toLowerCase());
+
+                const isInWishlist = wishlist.some(item => item.id === product.id);
+                const wishlistIconClass = isInWishlist ? 'fa-solid' : 'fa-regular';
+
+                productCard.innerHTML = `
+                    <img src="${product.imageUrl}" alt="${product.name}" class="rounded-md mb-3 w-full h-48 object-cover">
+                    <h4 class="text-lg font-semibold text-[#4A3A5A] mb-1">${product.name}</h4>
+                    <p class="text-[#705E82] text-sm">${product.description}</p>
+                    <p class="text-[#A98CD7] font-bold mt-2">₹${product.price.toLocaleString('en-IN')}</p>
+                    <div class="flex justify-between items-center mt-3">
+                        <button class="add-to-cart-btn bg-[#A98CD7] hover:bg-[#7B62A3] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300" data-product-id="${product.id}">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button class="wishlist-btn text-[#A98CD7] hover:text-[#7B62A3] text-xl transition duration-300" data-product-id="${product.id}">
+                            <i class="${wishlistIconClass} fa-heart"></i>
+                        </button>
+                    </div>
+                `;
+                collectionGrid.appendChild(productCard);
+            });
+            addEventListenersToProductButtons();
+        }
+
+        function filterAndPaginateProducts() {
+            const activeCategoryButton = document.querySelector('.filter-button.active');
+            const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
+            const searchTerm = productSearchInput.value.toLowerCase().trim();
+
+            const filteredAndSearchedProducts = allProducts.filter(item => {
+                const matchesCategory = (selectedCategory === 'all' || item.category === selectedCategory);
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+
+            const totalPages = Math.ceil(filteredAndSearchedProducts.length / ITEMS_PER_PAGE);
+
+            if (currentPage > totalPages && totalPages > 0) {
+                currentPage = totalPages;
+            } else if (totalPages === 0) {
+                currentPage = 1;
+            }
+
+            const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+            const endIndex = startIndex + ITEMS_PER_PAGE;
+            const productsToDisplay = filteredAndSearchedProducts.slice(startIndex, endIndex);
+
+            renderProducts(productsToDisplay);
+            renderPaginationControls(totalPages);
+        }
+
+        function renderPaginationControls(totalPages) {
+            paginationControls.innerHTML = '';
+
+            if (totalPages <= 1) {
+                return;
+            }
+
+            if (currentPage > 1) {
+                const prevButton = document.createElement('button');
+                prevButton.classList.add('pagination-button', 'px-4');
+                prevButton.textContent = '<';
+                prevButton.addEventListener('click', () => {
+                    currentPage--;
+                    filterAndPaginateProducts();
+                    window.scrollTo({ top: collectionGrid.offsetTop, behavior: 'smooth' });
+                });
+                paginationControls.appendChild(prevButton);
+            }
+
+            for (let i = 1; i <= totalPages; i++) {
+                const pageButton = document.createElement('button');
+                pageButton.classList.add('pagination-button', 'px-4');
+                pageButton.textContent = i;
+                if (i === currentPage) {
+                    pageButton.classList.add('active');
+                }
+                pageButton.addEventListener('click', () => {
+                    currentPage = i;
+                    filterAndPaginateProducts();
+                    window.scrollTo({ top: collectionGrid.offsetTop, behavior: 'smooth' });
+                });
+                paginationControls.appendChild(pageButton);
+            }
+
+            if (currentPage < totalPages) {
+                const nextButton = document.createElement('button');
+                nextButton.classList.add('pagination-button', 'px-4');
+                nextButton.textContent = '>';
+                nextButton.addEventListener('click', () => {
+                    currentPage++;
+                    filterAndPaginateProducts();
+                    window.scrollTo({ top: collectionGrid.offsetTop, behavior: 'smooth' });
+                });
+                paginationControls.appendChild(nextButton);
+            }
+        }
+
+        // --- Cart & Wishlist Functions ---
+
+        function updateCartCount() {
+            cartCountSpan.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function updateWishlistCount() {
+            wishlistCountSpan.textContent = wishlist.length;
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+        }
+
+        function renderCartItems() {
+            cartItemsDiv.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block';
+            } else {
+                emptyCartMessage.style.display = 'none';
+                cart.forEach(item => {
+                    total += item.price * item.quantity;
+                    const cartItemEl = document.createElement('div');
+                    cartItemEl.classList.add('flex', 'items-center', 'justify-between', 'bg-[#F7F4FA]', 'p-3', 'rounded-lg', 'shadow-sm');
+                    cartItemEl.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                            <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
+                            <div>
+                                <h4 class="font-semibold text-[#4A3A5A]">${item.name}</h4>
+                                <p class="text-[#705E82] text-sm">₹${item.price.toLocaleString('en-IN')} x ${item.quantity}</p>
+                            </div>
+                        </div>
+                        <button class="remove-from-cart-btn text-red-500 hover:text-red-700 transition duration-300" data-product-id="${item.id}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    `;
+                    cartItemsDiv.appendChild(cartItemEl);
+                });
+            }
+            cartTotalSpan.textContent = total.toLocaleString('en-IN');
+        }
+
+        function renderWishlistItems() {
+            wishlistItemsDiv.innerHTML = '';
+            if (wishlist.length === 0) {
+                emptyWishlistMessage.style.display = 'block';
+            } else {
+                emptyWishlistMessage.style.display = 'none';
+                wishlist.forEach(item => {
+                    const wishlistItemEl = document.createElement('div');
+                    wishlistItemEl.classList.add('bg-white', 'rounded-lg', 'p-4', 'shadow-sm', 'border', 'border-[#E0D0EE]', 'flex', 'flex-col', 'items-center');
+                    wishlistItemEl.innerHTML = `
+                        <img src="${item.imageUrl}" alt="${item.name}" class="rounded-md mb-3 w-full h-48 object-cover">
+                        <h4 class="text-lg font-semibold text-[#4A3A5A] mb-1 text-center">${item.name}</h4>
+                        <p class="text-[#A98CD7] font-bold mt-2">₹${item.price.toLocaleString('en-IN')}</p>
+                        <div class="flex justify-center space-x-2 mt-3 w-full">
+                            <button class="add-to-cart-from-wishlist-btn bg-[#A98CD7] hover:bg-[#7B62A3] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300 flex-grow" data-product-id="${item.id}">
+                                <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                            </button>
+                            <button class="remove-from-wishlist-btn text-red-500 hover:text-red-700 transition duration-300 p-2 rounded-full" data-product-id="${item.id}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    wishlistItemsDiv.appendChild(wishlistItemEl);
+                });
+            }
+        }
+
+        function addToCart(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                const existingCartItem = cart.find(item => item.id === productId);
+                if (existingCartItem) {
+                    existingCartItem.quantity++;
+                } else {
+                    cart.push({ ...product, quantity: 1 });
+                }
+                updateCartCount();
+            }
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartCount();
+            renderCartItems();
+        }
+
+        function toggleWishlist(productId) {
+            const product = allProducts.find(p => p.id === productId);
+            if (product) {
+                const existingWishlistItemIndex = wishlist.findIndex(item => item.id === productId);
+                if (existingWishlistItemIndex !== -1) {
+                    wishlist.splice(existingWishlistItemIndex, 1);
+                } else {
+                    wishlist.push(product);
+                }
+                updateWishlistCount();
+                renderWishlistItems();
+                filterAndPaginateProducts();
+            }
+        }
+
+        // --- Event Listeners ---
+
+        // Helper function to handle section display and scrolling
+        function showSectionAndScroll(sectionId, elementToScrollToId = null) {
+            hideAllSections();
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.remove('hidden-section');
+                setTimeout(() => { // Small delay to ensure section is visible before scrolling
+                    const elementToScrollTo = elementToScrollToId ? document.getElementById(elementToScrollToId) : targetSection;
+                    if (elementToScrollTo) {
+                        elementToScrollTo.scrollIntoView({ behavior: 'smooth' });
+                    }
+                }, 100);
+            }
+        }
+
+
+        // Add event listeners to each navigation link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                let targetSectionId;
+                let elementToScrollToId = null;
+
+                if (link.id === 'home-link') {
+                    targetSectionId = 'home-section';
+                    currentPage = 1;
+                    filterAndPaginateProducts();
+                } else if (link.id === 'features-link') {
+                    targetSectionId = 'features-details';
+                } else if (link.id === 'about-link') {
+                    targetSectionId = 'about-details';
+                } else if (link.id === 'contact-link') {
+                    targetSectionId = 'contact-details';
+                } else if (link.id === 'cart-link') {
+                    targetSectionId = 'cart-section';
+                    renderCartItems();
+                } else if (link.id === 'wishlist-link') {
+                    targetSectionId = 'wishlist-section';
+                    renderWishlistItems();
+                } else if (link.id === 'account-link') {
+                    alert('Account page functionality to be added!'); // Placeholder for account page
+                    targetSectionId = 'home-section'; // Or redirect to login/profile page
+                } else if (link.id === 'search-link') {
+                    targetSectionId = 'home-section'; // Search bar is on home section
+                    elementToScrollToId = 'product-search'; // Scroll to the search input
+                }
+
+                showSectionAndScroll(targetSectionId, elementToScrollToId);
+            });
+        });
+
+        // Add event listeners for new footer navigation links
+        if (footerAboutLink) {
+            footerAboutLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showSectionAndScroll('about-details'); // Just show About section
+            });
+        }
+        if (footerFeaturesLink) {
+            footerFeaturesLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showSectionAndScroll('features-details'); // Just show Features section
+            });
+        }
+        if (footerFoundersLink) {
+            footerFoundersLink.addEventListener('click', function(event) {
+                event.preventDefault();
+                showSectionAndScroll('about-details', 'founders-section'); // Show About, then scroll to founders
+            });
+        }
+
+
+        // Add event listeners to the "Explore Collections" button
+        exploreCollectionsBtn.addEventListener('click', function() {
+            hideAllSections();
+            document.getElementById('home-section').classList.remove('hidden-section');
+            currentPage = 1;
+            document.querySelector('.filter-button[data-category="all"]').click();
+            document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Add event listeners to all close buttons
+        const closeButtons = document.querySelectorAll('.close-button');
+        closeButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const parentSection = button.closest('section');
+                if (parentSection) {
+                    parentSection.classList.add('hidden-section');
+                }
+                document.getElementById('home-section').classList.remove('hidden-section');
+                document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' });
+                filterAndPaginateProducts();
+            });
+        });
+
+        // Add event listeners to filter buttons
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                currentPage = 1;
+                filterAndPaginateProducts();
+            });
+        });
+
+        // Event listener for search input
+        productSearchInput.addEventListener('keyup', () => {
+            currentPage = 1;
+            filterAndPaginateProducts();
+        });
+
+        // Function to attach event listeners to dynamically created product buttons
+        function addEventListenersToProductButtons() {
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.onclick = (event) => {
+                    event.stopPropagation();
+                    addToCart(button.dataset.productId);
+                };
+            });
+            document.querySelectorAll('.wishlist-btn').forEach(button => {
+                button.onclick = (event) => {
+                    event.stopPropagation();
+                    toggleWishlist(button.dataset.productId);
+                };
+            });
+            document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                button.onclick = () => removeFromCart(button.dataset.productId);
+            });
+            document.querySelectorAll('.add-to-cart-from-wishlist-btn').forEach(button => {
+                button.onclick = () => {
+                    addToCart(button.dataset.productId);
+                    toggleWishlist(button.dataset.productId);
+                };
+            });
+            document.querySelectorAll('.remove-from-wishlist-btn').forEach(button => {
+                button.onclick = () => toggleWishlist(button.dataset.productId);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            hideAllSections();
+            document.getElementById('home-section').classList.remove('hidden-section');
+            document.querySelector('.filter-button[data-category="all"]').click();
+            updateCartCount();
+            updateWishlistCount();
+        });
+    </script>
+</body>
+</html>

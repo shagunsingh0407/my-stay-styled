@@ -6,11 +6,22 @@
     <title>Stay Styled</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght%40400%3B600%3B700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #540d68; /* The requested color */
+            --light-hover: #6a1a82; /* Slightly lighter for hover effects */
+            --gray-border: #CCCCCC;
+            --light-gray-background: #EEEEEE;
+            --medium-gray-border: #999999;
+            --placeholder-bg: #F0F0F0;
+            --placeholder-text: #333333;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #F7F4FA; /* Very light lavender for the overall background */
-            color: #332244; /* Dark purple-grey for main text */
+            background-color: #FFFFFF; /* White background */
+            color: var(--primary-color); /* Primary color text */
         }
         /* Custom styles for hidden sections */
         .hidden-section {
@@ -18,9 +29,9 @@
         }
         /* Style for active filter button */
         .filter-button.active {
-            background-color: #A98CD7; /* Light vibrant lavender for active state */
+            background-color: var(--primary-color); /* Primary color for active state */
             color: white;
-            border-color: #A98CD7;
+            border-color: var(--primary-color);
         }
         /* Basic hover effect for collection items */
         .collection-item {
@@ -28,12 +39,12 @@
         }
         .collection-item:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08); /* Slightly less intense shadow */
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Slightly less intense shadow */
         }
         /* Override Tailwind's default placeholder image colors for consistency */
         img[src*="via.placeholder.com"] {
-            background-color: #F0E8F8; /* Very light lavender for placeholder background */
-            color: #9988AA; /* Muted purple-grey for placeholder text */
+            background-color: var(--placeholder-bg); /* Light gray for placeholder background */
+            color: var(--placeholder-text); /* Dark gray for placeholder text */
         }
         /* Search bar styling */
         .search-bar-container {
@@ -47,51 +58,51 @@
             max-width: 500px;
             padding: 0.75rem 1.25rem;
             padding-right: 3rem; /* Space for icon */
-            border: 1px solid #E0D0EE; /* Lighter lavender border */
+            border: 1px solid var(--gray-border); /* Gray border */
             border-radius: 9999px; /* Fully rounded */
             background-color: #FFFFFF; /* White background for search input */
-            color: #332244;
+            color: var(--primary-color);
             font-size: 1rem;
             outline: none;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); /* Lighter shadow */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Lighter shadow */
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
         .search-input:focus {
-            border-color: #A98CD7; /* Accent lavender on focus */
-            box-shadow: 0 0 0 3px rgba(169, 140, 215, 0.2); /* Soft lavender focus ring */
+            border-color: var(--primary-color); /* Primary color on focus */
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1); /* Soft black focus ring */
         }
         .search-icon {
             position: absolute;
             right: 1.25rem;
             top: 50%;
             transform: translateY(-50%);
-            color: #7B62A3; /* Medium-dark lavender */
+            color: var(--placeholder-text); /* Dark gray */
             pointer-events: none; /* Make icon unclickable */
         }
         /* Pagination button styling */
         .pagination-button {
-            background-color: #F0E8F8; /* Very light lavender */
-            color: #705E82; /* Softer dark purple-grey */
-            border: 1px solid #A98CD7; /* Light vibrant lavender border */
+            background-color: var(--light-gray-background); /* Light gray */
+            color: var(--primary-color); /* Primary color */
+            border: 1px solid var(--medium-gray-border); /* Medium gray border */
             font-weight: 600;
             padding: 0.5rem 1rem;
             border-radius: 0.5rem;
             transition: background-color 0.3s, color 0.3s, border-color 0.3s;
         }
         .pagination-button:hover {
-            background-color: #E0D0EE; /* Slightly darker light lavender */
-            color: #332244;
+            background-color: var(--medium-gray-border); /* Slightly darker light gray */
+            color: var(--primary-color);
         }
         .pagination-button.active {
-            background-color: #A98CD7; /* Light vibrant lavender */
+            background-color: var(--primary-color); /* Primary color */
             color: white;
-            border-color: #A98CD7;
+            border-color: var(--primary-color);
         }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
 
-    <div class="bg-gray-800 text-white text-xs py-2 px-4 flex justify-between items-center flex-wrap">
+    <div class="text-white text-xs py-2 px-4 flex justify-between items-center flex-wrap" style="background-color: var(--primary-color);">
         <div class="flex space-x-3">
             <a href="#" class="hover:text-gray-400"><i class="fab fa-facebook"></i></a>
             <a href="#" class="hover:text-gray-400"><i class="fab fa-instagram"></i></a>
@@ -100,14 +111,15 @@
             <a href="#" class="hover:text-gray-400"><i class="fab fa-whatsapp"></i></a>
             <a href="#" class="hover:text-gray-400"><i class="fab fa-telegram-plane"></i></a>
             <a href="#" class="hover:text-gray-400"><i class="fab fa-snapchat"></i></a>
-            <a href="#" class="hover:text-gray-400"><i class="fab fa-twitter"></i></a> </div>
+            <a href="#" class="hover:text-gray-400"><i class="fab fa-twitter"></i></a>
+        </div>
         <p class="hidden md:block">1 Million+ Squad, Outfits for Every Mood!</p>
-        <button class="bg-[#A98CD7] hover:bg-[#5E3D80] text-white py-1 px-3 rounded-full text-xs">
+        <button class="py-1 px-3 rounded-full text-xs" style="background-color: var(--primary-color); color: white; border: 1px solid white; hover:background-color: var(--light-hover);">
             <i class="fa-solid fa-download"></i> DOWNLOAD APP
         </button>
     </div>
 
-    <header class="bg-[#7B62A3] text-white p-4 shadow-lg">
+    <header class="p-4 shadow-lg" style="background-color: var(--primary-color); color: white;">
         <div class="container mx-auto flex justify-between items-center">
             <img src="Images/stay_styled_logo.png" alt="Stay Styled Logo" class="max-h-24">
             <nav>
@@ -128,39 +140,39 @@
     <main class="flex-grow container mx-auto p-6">
         <section id="home-section" class="bg-white rounded-xl shadow-xl p-8 mb-10">
             <div class="text-center transform transition duration-500 hover:scale-105 mb-12">
-                <h2 class="text-5xl font-extrabold text-[#5E3D80] mb-4">Welcome to Stay Styled!</h2>
-                <p class="text-xl text-[#705E82] mb-6 max-w-3xl mx-auto">
+                <h2 class="text-5xl font-extrabold mb-4" style="color: var(--primary-color);">Welcome to Stay Styled!</h2>
+                <p class="text-xl mb-6 max-w-3xl mx-auto" style="color: var(--primary-color);">
                     If you're a Pinterest enthusiast looking to recreate every dream outfit, then congratulations!
                     You've found your ultimate destination to make those fashion dreams a reality.
                 </p>
-                <button id="explore-collections-btn" class="bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+                <button id="explore-collections-btn" class="font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
                     Explore Collections
                 </button>
             </div>
 
             <div class="mb-12">
-                <h3 class="text-4xl font-extrabold text-[#5E3D80] mb-8 text-center">Our Top Picks</h3>
+                <h3 class="text-4xl font-extrabold mb-8 text-center" style="color: var(--primary-color);">Our Top Picks</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-[#F7F4FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="https://via.placeholder.com/300x200/F0E8F8/9988AA?text=Summer+Vibes" alt="Summer Vibes Collection" class="rounded-md mb-4 mx-auto w-full">
-                        <h4 class="text-2xl font-semibold text-[#705E82] mb-2">Summer Vibes Collection</h4>
-                        <p class="text-[#9988AA] text-center">Light fabrics and vibrant colors for a perfect summer.</p>
+                    <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="https://via.placeholder.com/300x200/F0F0F0/333333?text=Summer+Vibes" alt="Summer Vibes Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Summer Vibes Collection</h4>
+                        <p class="text-center" style="color: var(--primary-color);">Light fabrics and vibrant colors for a perfect summer.</p>
                     </div>
-                    <div class="bg-[#F7F4FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="https://via.placeholder.com/300x200/F0E8F8/9988AA?text=Cozy+Essentials" alt="Cozy Essentials Collection" class="rounded-md mb-4 mx-auto w-full">
-                        <h4 class="text-2xl font-semibold text-[#705E82] mb-2">Cozy Essentials</h4>
-                        <p class="text-[#9988AA] text-center">Comfort meets style with our softest autumn collection.</p>
+                    <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="https://via.placeholder.com/300x200/F0F0F0/333333?text=Cozy+Essentials" alt="Cozy Essentials Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Cozy Essentials</h4>
+                        <p class="text-center" style="color: var(--primary-color);">Comfort meets style with our softest autumn collection.</p>
                     </div>
-                    <div class="bg-[#F7F4FA] rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="https://via.placeholder.com/300x200/F0E8F8/9988AA?text=Evening+Glam" alt="Evening Glam Collection" class="rounded-md mb-4 mx-auto w-full">
-                        <h4 class="text-2xl font-semibold text-[#705E82] mb-2">Evening Glam</h4>
-                        <p class="text-[#9988AA] text-center">Dazzle at any event with our elegant evening wear.</p>
+                    <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
+                        <img src="https://via.placeholder.com/300x200/F0F0F0/333333?text=Evening+Glam" alt="Evening Glam Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Evening Glam</h4>
+                        <p class="text-center" style="color: var(--primary-color);">Dazzle at any event with our elegant evening wear.</p>
                     </div>
                 </div>
             </div>
 
             <div>
-                <h3 class="text-4xl font-extrabold text-[#5E3D80] mb-8 text-center">Our Full Collection</h3>
+                <h3 class="text-4xl font-extrabold mb-8 text-center" style="color: var(--primary-color);">Our Full Collection</h3>
 
                 <div class="search-bar-container">
                     <input type="text" id="product-search" class="search-input" placeholder="Search for items...">
@@ -168,11 +180,11 @@
                 </div>
 
                 <div class="flex justify-center space-x-4 mb-8 flex-wrap">
-                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE] active" data-category="all">All</button>
-                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="dresses">Dresses</button>
-                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="tops">Tops</button>
-                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="bottoms">Bottoms</button>
-                    <button class="filter-button bg-[#F0E8F8] text-[#705E82] border border-[#A98CD7] font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-[#E0D0EE]" data-category="accessories">Accessories</button>
+                    <button class="filter-button bg-white text-black border font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-gray-100 active" style="color: var(--primary-color); border-color: var(--primary-color);" data-category="all">All</button>
+                    <button class="filter-button bg-white text-black border font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-gray-100" style="color: var(--primary-color); border-color: var(--primary-color);" data-category="dresses">Dresses</button>
+                    <button class="filter-button bg-white text-black border font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-gray-100" style="color: var(--primary-color); border-color: var(--primary-color);" data-category="tops">Tops</button>
+                    <button class="filter-button bg-white text-black border font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-gray-100" style="color: var(--primary-color); border-color: var(--primary-color);" data-category="bottoms">Bottoms</button>
+                    <button class="filter-button bg-white text-black border font-semibold py-2 px-6 rounded-full transition duration-300 hover:bg-gray-100" style="color: var(--primary-color); border-color: var(--primary-color);" data-category="accessories">Accessories</button>
                 </div>
 
                 <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
@@ -184,108 +196,108 @@
         </section>
 
         <section id="cart-section" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-4xl mx-auto">
-            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">Your Shopping Cart</h2>
+            <h2 class="text-4xl font-extrabold mb-4 text-center" style="color: var(--primary-color);">Your Shopping Cart</h2>
             <div id="cart-items" class="space-y-4">
-                <p id="empty-cart-message" class="text-center text-[#705E82]">Your cart is empty.</p>
+                <p id="empty-cart-message" class="text-center" style="color: var(--primary-color);">Your cart is empty.</p>
             </div>
-            <div id="cart-summary" class="mt-8 pt-4 border-t border-[#E0D0EE] text-right">
-                <p class="text-xl font-bold text-[#4A3A5A]">Total: ₹<span id="cart-total">0</span></p>
-                <button class="mt-4 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out">Proceed to Checkout</button>
+            <div id="cart-summary" class="mt-8 pt-4 border-t border-gray-300 text-right">
+                <p class="text-xl font-bold" style="color: var(--primary-color);">Total: ₹<span id="cart-total">0</span></p>
+                <button class="font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out mt-4" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">Proceed to Checkout</button>
             </div>
-            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+            <button class="close-button mt-6 font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
                 Continue Shopping
             </button>
         </section>
 
         <section id="wishlist-section" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-4xl mx-auto">
-            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">Your Wishlist</h2>
+            <h2 class="text-4xl font-extrabold mb-4 text-center" style="color: var(--primary-color);">Your Wishlist</h2>
             <div id="wishlist-items" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <p id="empty-wishlist-message" class="text-center text-[#705E82] col-span-full">Your wishlist is empty.</p>
+                <p id="empty-wishlist-message" class="text-center col-span-full" style="color: var(--primary-color);">Your wishlist is empty.</p>
             </div>
-            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+            <button class="close-button mt-6 font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
                 Continue Shopping
             </button>
         </section>
 
         <section id="features-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-4xl mx-auto">
-            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">Our Amazing Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-[#705E82]">
+            <h2 class="text-4xl font-extrabold mb-4 text-center" style="color: var(--primary-color);">Our Amazing Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6" style="color: var(--primary-color);">
                 <div>
-                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Exclusive Collections</h3>
+                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Exclusive Collections</h3>
                     <p>Discover unique and curated fashion collections that you won't find anywhere else. We partner with emerging designers to bring you the latest trends.</p>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Personalized Styling</h3>
+                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Personalized Styling</h3>
                     <p>Get personalized style recommendations based on your preferences and body type. Our AI-powered stylist helps you find your perfect look.</p>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Sustainable Fashion</h3>
+                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Sustainable Fashion</h3>
                     <p>We are committed to ethical sourcing and sustainable practices. Shop guilt-free knowing your clothes are made with care for the planet.</p>
                 </div>
                 <div>
-                    <h3 class="text-2xl font-semibold text-[#4A3A5A] mb-2">Fast & Free Shipping</h3>
+                    <h3 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Fast & Free Shipping</h3>
                     <p>Enjoy quick and reliable shipping on all orders, with free shipping for purchases over a certain amount. Your style, delivered fast.</p>
                 </div>
             </div>
-            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+            <button class="close-button mt-6 font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
                 Close
             </button>
         </section>
 
         <section id="about-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-3xl mx-auto">
-            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4 text-center">About Stay Styled</h2>
-            <p class="text-lg text-[#705E82] mb-4">
+            <h2 class="text-4xl font-extrabold mb-4 text-center" style="color: var(--primary-color);">About Stay Styled</h2>
+            <p class="text-lg mb-4" style="color: var(--primary-color);">
                 Stay Styled was founded in 2020 with a vision to make high-fashion accessible to everyone.
                 We believe that style is a form of self-expression and should be celebrated by all.
             </p>
-            <p class="text-lg text-[#705E82] mb-4">
+            <p class="text-lg mb-4" style="color: var(--primary-color);">
                 Our mission is to provide a seamless shopping experience, offering a diverse range of clothing
                 and accessories that empower individuals to embrace their unique style.
             </p>
-            <p class="text-lg text-[#705E82]">
+            <p class="text-lg" style="color: var(--primary-color);">
                 We are a passionate team dedicated to bringing you quality, trend-setting pieces
                 and exceptional customer service.
             </p>
 
-            <div id="founders-section" class="mt-10 pt-8 border-t border-[#E0D0EE]">
-                <h3 class="text-3xl font-extrabold text-[#5E3D80] mb-6 text-center">Meet Our Founder</h3>
+            <div id="founders-section" class="mt-10 pt-8 border-t border-gray-300">
+                <h3 class="text-3xl font-extrabold mb-6 text-center" style="color: var(--primary-color);">Meet Our Founder</h3>
                 <div class="flex flex-col md:flex-row items-center md:space-x-8">
                     <div class="md:w-1/3 mb-6 md:mb-0">
-                        <img src="https://via.placeholder.com/200x200/F0E8F8/9988AA?text=Your+Picture" alt="Your Name" class="rounded-full w-48 h-48 object-cover mx-auto shadow-md">
+                        <img src="https://via.placeholder.com/200x200/F0F0F0/333333?text=Your+Picture" alt="Your Name" class="rounded-full w-48 h-48 object-cover mx-auto shadow-md">
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h4 class="text-2xl font-semibold text-[#4A3A5A] mb-2"> [Your Name Here]</h4>
-                        <p class="text-lg text-[#705E82] mb-3">**Founder & CEO**</p>
-                        <p class="text-[#705E82]">
+                        <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);"> [Your Name Here]</h4>
+                        <p class="text-lg mb-3" style="color: var(--primary-color);">**Founder & CEO**</p>
+                        <p style="color: var(--primary-color);">
                             [Your Name] envisioned Stay Styled as a platform to bridge the gap between aspirational fashion and everyday accessibility. With a keen eye for trends and a passion for empowering individuals through style, [Your Name] leads the brand's creative direction and commitment to customer satisfaction. [Add a short bio about yourself, your vision, or what inspired you to start this.]
                         </p>
                     </div>
                 </div>
             </div>
-            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+            <button class="close-button mt-6 font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
                 Close
             </button>
         </section>
 
         <section id="contact-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-2xl mx-auto text-center">
-            <h2 class="text-4xl font-extrabold text-[#5E3D80] mb-4">Get in Touch!</h2>
-            <p class="text-lg text-[#705E82] mb-4">
+            <h2 class="text-4xl font-extrabold mb-4" style="color: var(--primary-color);">Get in Touch!</h2>
+            <p class="text-lg mb-4" style="color: var(--primary-color);">
                 We'd love to hear from you. Here's how you can reach us:
             </p>
-            <ul class="list-none p-0 m-0 text-[#705E82] text-xl space-y-3">
+            <ul class="list-none p-0 m-0 text-xl space-y-3" style="color: var(--primary-color);">
                 <li><strong>Email:</strong> info@staystyled.com</li>
                 <li><strong>Phone:</strong> +1 (555) 123-4567</li>
                 <li><strong>Address:</strong> 123 Fashion Lane, Style City, ST 98765</li>
             </ul>
-            <button class="close-button mt-6 bg-[#A98CD7] hover:bg-[#7B62A3] text-white font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto">
+            <button class="close-button mt-6 font-bold py-2 px-6 rounded-full shadow-lg transition duration-300 ease-in-out block mx-auto" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
                 Close
             </button>
         </section>
     </main>
 
-    <footer class="bg-[#7B62A3] text-white p-6 mt-10 shadow-inner">
+    <footer class="p-6 mt-10 shadow-inner" style="background-color: var(--primary-color); color: white;">
         <div class="container mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-[#A98CD7]">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 pb-8 border-b border-gray-700">
                 <div>
                     <h4 class="font-bold text-lg mb-4">HELP</h4>
                     <ul class="space-y-2 text-sm">
@@ -329,17 +341,18 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-lg mb-4">ABOUT STAY STYLED</h4>
+                    <h4 class="font-bold text-lg mt-6 mb-4">ABOUT STAY STYLED</h4>
                     <ul class="space-y-2 text-sm">
                         <li><a id="footer-about-link" href="#" class="hover:underline">Our Story</a></li>
                         <li><a id="footer-features-link" href="#" class="hover:underline">Features</a></li>
                         <li><a href="#" class="hover:underline">Sustainability</a></li>
                         <li><a href="#" class="hover:underline">Latest News</a></li>
                         <li><a href="#" class="hover:underline">Careers</a></li>
-                        <li><a id="footer-founders-link" href="#" class="hover:underline">Founders</a></li> </ul>
+                        <li><a id="footer-founders-link" href="#" class="hover:underline">Founders</a></li>
+                    </ul>
                     <h4 class="font-bold text-lg mt-6 mb-4">CONNECT</h4>
                     <p class="text-sm mb-4">Sign up for our emails to get the latest news, exclusive launches, and collections.</p>
-                    <button class="bg-[#A98CD7] hover:bg-[#5E3D80] text-white font-bold py-2 px-4 rounded-full text-xs transition duration-300">Sign Up for Emails</button>
+                    <button class="font-bold py-2 px-4 rounded-full text-xs transition duration-300" style="background-color: var(--primary-color); color: white; border: 1px solid white; hover:background-color: var(--light-hover);">Sign Up for Emails</button>
                     <div class="mt-4">
                         <h5 class="font-semibold text-sm mb-2">Follow Us:</h5>
                         <div class="flex space-x-3 text-xl">
@@ -350,7 +363,8 @@
                             <a href="#" class="hover:text-gray-200"><i class="fab fa-whatsapp"></i></a>
                             <a href="#" class="hover:text-gray-200"><i class="fab fa-telegram-plane"></i></a>
                             <a href="#" class="hover:text-gray-200"><i class="fab fa-snapchat"></i></a>
-                            <a href="#" class="hover:text-gray-200"><i class="fab fa-twitter"></i></a> </div>
+                            <a href="#" class="hover:text-gray-200"><i class="fab fa-twitter"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -396,7 +410,7 @@
                     description: `A stylish ${category} for all occasions.`,
                     price: Math.floor(Math.random() * priceRange) + startPrice,
                     category: category,
-                    imageUrl: `https://via.placeholder.com/300x250/F0E8F8/9988AA?text=${category}+${i}`
+                    imageUrl: `https://via.placeholder.com/300x250/F0F0F0/333333?text=${category}+${i}`
                 });
             }
         }
@@ -454,13 +468,13 @@
         function renderProducts(productsToDisplay) {
             collectionGrid.innerHTML = '';
             if (productsToDisplay.length === 0) {
-                collectionGrid.innerHTML = '<p class="text-center text-[#705E82] col-span-full">No items found matching your criteria.</p>';
+                collectionGrid.innerHTML = '<p class="text-center col-span-full" style="color: var(--primary-color);">No items found matching your criteria.</p>';
                 return;
             }
 
             productsToDisplay.forEach(product => {
                 const productCard = document.createElement('div');
-                productCard.classList.add('collection-item', 'bg-white', 'rounded-lg', 'p-4', 'shadow-sm', 'border', 'border-[#E0D0EE]');
+                productCard.classList.add('collection-item', 'bg-white', 'rounded-lg', 'p-4', 'shadow-sm', 'border', 'border-gray-300');
                 productCard.setAttribute('data-category', product.category);
                 productCard.setAttribute('data-name', product.name.toLowerCase());
 
@@ -469,14 +483,14 @@
 
                 productCard.innerHTML = `
                     <img src="${product.imageUrl}" alt="${product.name}" class="rounded-md mb-3 w-full h-48 object-cover">
-                    <h4 class="text-lg font-semibold text-[#4A3A5A] mb-1">${product.name}</h4>
-                    <p class="text-[#705E82] text-sm">${product.description}</p>
-                    <p class="text-[#A98CD7] font-bold mt-2">₹${product.price.toLocaleString('en-IN')}</p>
+                    <h4 class="text-lg font-semibold mb-1" style="color: var(--primary-color);">${product.name}</h4>
+                    <p class="text-sm" style="color: var(--primary-color);">${product.description}</p>
+                    <p class="font-bold mt-2" style="color: var(--primary-color);">₹${product.price.toLocaleString('en-IN')}</p>
                     <div class="flex justify-between items-center mt-3">
-                        <button class="add-to-cart-btn bg-[#A98CD7] hover:bg-[#7B62A3] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300" data-product-id="${product.id}">
+                        <button class="add-to-cart-btn text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300" style="background-color: var(--primary-color); hover:background-color: var(--light-hover);" data-product-id="${product.id}">
                             <i class="fa-solid fa-cart-plus"></i> Add to Cart
                         </button>
-                        <button class="wishlist-btn text-[#A98CD7] hover:text-[#7B62A3] text-xl transition duration-300" data-product-id="${product.id}">
+                        <button class="wishlist-btn hover:text-gray-600 text-xl transition duration-300" style="color: var(--primary-color);" data-product-id="${product.id}">
                             <i class="${wishlistIconClass} fa-heart"></i>
                         </button>
                     </div>
@@ -516,54 +530,50 @@
         function renderPaginationControls(totalPages) {
             paginationControls.innerHTML = '';
 
-            if (totalPages <= 1) {
-                return;
-            }
-
-            if (currentPage > 1) {
-                const prevButton = document.createElement('button');
-                prevButton.classList.add('pagination-button', 'px-4');
-                prevButton.textContent = '<';
-                prevButton.addEventListener('click', () => {
+            // Previous Button
+            const prevButton = document.createElement('button');
+            prevButton.classList.add('pagination-button');
+            prevButton.textContent = 'Previous';
+            prevButton.disabled = currentPage === 1;
+            prevButton.addEventListener('click', () => {
+                if (currentPage > 1) {
                     currentPage--;
                     filterAndPaginateProducts();
-                    window.scrollTo({ top: collectionGrid.offsetTop, behavior: 'smooth' });
-                });
-                paginationControls.appendChild(prevButton);
-            }
+                }
+            });
+            paginationControls.appendChild(prevButton);
 
+            // Page Number Buttons
             for (let i = 1; i <= totalPages; i++) {
                 const pageButton = document.createElement('button');
-                pageButton.classList.add('pagination-button', 'px-4');
-                pageButton.textContent = i;
+                pageButton.classList.add('pagination-button');
                 if (i === currentPage) {
                     pageButton.classList.add('active');
                 }
+                pageButton.textContent = i;
                 pageButton.addEventListener('click', () => {
                     currentPage = i;
                     filterAndPaginateProducts();
-                    window.scrollTo({ top: collectionGrid.offsetTop, behavior: 'smooth' });
                 });
                 paginationControls.appendChild(pageButton);
             }
 
-            if (currentPage < totalPages) {
-                const nextButton = document.createElement('button');
-                nextButton.classList.add('pagination-button', 'px-4');
-                nextButton.textContent = '>';
-                nextButton.addEventListener('click', () => {
+            // Next Button
+            const nextButton = document.createElement('button');
+            nextButton.classList.add('pagination-button');
+            nextButton.textContent = 'Next';
+            nextButton.disabled = currentPage === totalPages || totalPages === 0;
+            nextButton.addEventListener('click', () => {
+                if (currentPage < totalPages) {
                     currentPage++;
                     filterAndPaginateProducts();
-                    window.scrollTo({ top: collectionGrid.offsetTop, behavior: 'smooth' });
-                });
-                paginationControls.appendChild(nextButton);
-            }
+                }
+            });
+            paginationControls.appendChild(nextButton);
         }
 
-        // --- Cart & Wishlist Functions ---
-
         function updateCartCount() {
-            cartCountSpan.textContent = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCountSpan.textContent = cart.length;
             localStorage.setItem('cart', JSON.stringify(cart));
         }
 
@@ -574,244 +584,262 @@
 
         function renderCartItems() {
             cartItemsDiv.innerHTML = '';
-            let total = 0;
-
             if (cart.length === 0) {
-                emptyCartMessage.style.display = 'block';
+                emptyCartMessage.classList.remove('hidden');
+                cartTotalSpan.textContent = '0';
+                return;
             } else {
-                emptyCartMessage.style.display = 'none';
-                cart.forEach(item => {
-                    total += item.price * item.quantity;
-                    const cartItemEl = document.createElement('div');
-                    cartItemEl.classList.add('flex', 'items-center', 'justify-between', 'bg-[#F7F4FA]', 'p-3', 'rounded-lg', 'shadow-sm');
-                    cartItemEl.innerHTML = `
-                        <div class="flex items-center space-x-4">
-                            <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
-                            <div>
-                                <h4 class="font-semibold text-[#4A3A5A]">${item.name}</h4>
-                                <p class="text-[#705E82] text-sm">₹${item.price.toLocaleString('en-IN')} x ${item.quantity}</p>
-                            </div>
-                        </div>
-                        <button class="remove-from-cart-btn text-red-500 hover:text-red-700 transition duration-300" data-product-id="${item.id}">
-                            <i class="fa-solid fa-trash"></i>
-                        </button>
-                    `;
-                    cartItemsDiv.appendChild(cartItemEl);
-                });
+                emptyCartMessage.classList.add('hidden');
             }
+
+            let total = 0;
+            cart.forEach(item => {
+                total += item.price;
+                const cartItemDiv = document.createElement('div');
+                cartItemDiv.classList.add('flex', 'items-center', 'justify-between', 'p-3', 'bg-gray-50', 'rounded-lg', 'shadow-sm');
+                cartItemDiv.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
+                        <div>
+                            <h4 class="font-semibold" style="color: var(--primary-color);">${item.name}</h4>
+                            <p style="color: var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p>
+                        </div>
+                    </div>
+                    <button class="remove-from-cart-btn py-1 px-3 rounded-full text-sm" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);" data-product-id="${item.id}">
+                        <i class="fa-solid fa-trash"></i> Remove
+                    </button>
+                `;
+                cartItemsDiv.appendChild(cartItemDiv);
+            });
             cartTotalSpan.textContent = total.toLocaleString('en-IN');
+            addEventListenersToCartButtons();
         }
 
         function renderWishlistItems() {
             wishlistItemsDiv.innerHTML = '';
             if (wishlist.length === 0) {
-                emptyWishlistMessage.style.display = 'block';
+                emptyWishlistMessage.classList.remove('hidden');
+                return;
             } else {
-                emptyWishlistMessage.style.display = 'none';
-                wishlist.forEach(item => {
-                    const wishlistItemEl = document.createElement('div');
-                    wishlistItemEl.classList.add('bg-white', 'rounded-lg', 'p-4', 'shadow-sm', 'border', 'border-[#E0D0EE]', 'flex', 'flex-col', 'items-center');
-                    wishlistItemEl.innerHTML = `
-                        <img src="${item.imageUrl}" alt="${item.name}" class="rounded-md mb-3 w-full h-48 object-cover">
-                        <h4 class="text-lg font-semibold text-[#4A3A5A] mb-1 text-center">${item.name}</h4>
-                        <p class="text-[#A98CD7] font-bold mt-2">₹${item.price.toLocaleString('en-IN')}</p>
-                        <div class="flex justify-center space-x-2 mt-3 w-full">
-                            <button class="add-to-cart-from-wishlist-btn bg-[#A98CD7] hover:bg-[#7B62A3] text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300 flex-grow" data-product-id="${item.id}">
-                                <i class="fa-solid fa-cart-plus"></i> Add to Cart
-                            </button>
-                            <button class="remove-from-wishlist-btn text-red-500 hover:text-red-700 transition duration-300 p-2 rounded-full" data-product-id="${item.id}">
-                                <i class="fa-solid fa-trash"></i>
-                            </button>
+                emptyWishlistMessage.classList.add('hidden');
+            }
+
+            wishlist.forEach(item => {
+                const wishlistItemDiv = document.createElement('div');
+                wishlistItemDiv.classList.add('flex', 'items-center', 'justify-between', 'p-3', 'bg-gray-50', 'rounded-lg', 'shadow-sm');
+                wishlistItemDiv.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
+                        <div>
+                            <h4 class="font-semibold" style="color: var(--primary-color);">${item.name}</h4>
+                            <p style="color: var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p>
                         </div>
-                    `;
-                    wishlistItemsDiv.appendChild(wishlistItemEl);
-                });
-            }
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="add-to-cart-from-wishlist-btn py-1 px-3 rounded-full text-sm" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);" data-product-id="${item.id}">
+                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                        </button>
+                        <button class="remove-from-wishlist-btn py-1 px-3 rounded-full text-sm" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);" data-product-id="${item.id}">
+                            <i class="fa-solid fa-trash"></i> Remove
+                        </button>
+                    </div>
+                `;
+                wishlistItemsDiv.appendChild(wishlistItemDiv);
+            });
+            addEventListenersToWishlistButtons();
         }
 
-        function addToCart(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            if (product) {
-                const existingCartItem = cart.find(item => item.id === productId);
-                if (existingCartItem) {
-                    existingCartItem.quantity++;
-                } else {
-                    cart.push({ ...product, quantity: 1 });
-                }
-                updateCartCount();
-            }
+        function addEventListenersToProductButtons() {
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    const product = allProducts.find(p => p.id === productId);
+                    if (product && !cart.some(item => item.id === productId)) {
+                        cart.push(product);
+                        updateCartCount();
+                        alert(`${product.name} added to cart!`);
+                    } else if (product) {
+                        alert(`${product.name} is already in your cart.`);
+                    }
+                };
+            });
+
+            document.querySelectorAll('.wishlist-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    const product = allProducts.find(p => p.id === productId);
+                    const icon = e.currentTarget.querySelector('i');
+
+                    if (product) {
+                        const index = wishlist.findIndex(item => item.id === productId);
+                        if (index > -1) {
+                            wishlist.splice(index, 1);
+                            icon.classList.remove('fa-solid');
+                            icon.classList.add('fa-regular');
+                            alert(`${product.name} removed from wishlist.`);
+                        } else {
+                            wishlist.push(product);
+                            icon.classList.remove('fa-regular');
+                            icon.classList.add('fa-solid');
+                            alert(`${product.name} added to wishlist!`);
+                        }
+                        updateWishlistCount();
+                    }
+                };
+            });
         }
 
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCartCount();
-            renderCartItems();
+        function addEventListenersToCartButtons() {
+            document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    cart = cart.filter(item => item.id !== productId);
+                    updateCartCount();
+                    renderCartItems();
+                    alert('Item removed from cart.');
+                };
+            });
         }
 
-        function toggleWishlist(productId) {
-            const product = allProducts.find(p => p.id === productId);
-            if (product) {
-                const existingWishlistItemIndex = wishlist.findIndex(item => item.id === productId);
-                if (existingWishlistItemIndex !== -1) {
-                    wishlist.splice(existingWishlistItemIndex, 1);
-                } else {
-                    wishlist.push(product);
-                }
-                updateWishlistCount();
-                renderWishlistItems();
-                filterAndPaginateProducts();
-            }
+        function addEventListenersToWishlistButtons() {
+            document.querySelectorAll('.remove-from-wishlist-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    wishlist = wishlist.filter(item => item.id !== productId);
+                    updateWishlistCount();
+                    renderWishlistItems();
+                    // Also update the heart icon on the main collection page if visible
+                    const productCardWishlistButton = document.querySelector(`.collection-item [data-product-id="${productId}"].wishlist-btn i`);
+                    if (productCardWishlistButton) {
+                        productCardWishlistButton.classList.remove('fa-solid');
+                        productCardWishlistButton.classList.add('fa-regular');
+                    }
+                    alert('Item removed from wishlist.');
+                };
+            });
+
+            document.querySelectorAll('.add-to-cart-from-wishlist-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    const product = allProducts.find(p => p.id === productId);
+                    if (product && !cart.some(item => item.id === productId)) {
+                        cart.push(product);
+                        updateCartCount();
+                        alert(`${product.name} added to cart!`);
+                    } else if (product) {
+                        alert(`${product.name} is already in your cart.`);
+                    }
+                };
+            });
         }
+
 
         // --- Event Listeners ---
 
-        // Helper function to handle section display and scrolling
-        function showSectionAndScroll(sectionId, elementToScrollToId = null) {
-            hideAllSections();
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.remove('hidden-section');
-                setTimeout(() => { // Small delay to ensure section is visible before scrolling
-                    const elementToScrollTo = elementToScrollToId ? document.getElementById(elementToScrollToId) : targetSection;
-                    if (elementToScrollTo) {
-                        elementToScrollTo.scrollIntoView({ behavior: 'smooth' });
-                    }
-                }, 100);
-            }
-        }
-
-
-        // Add event listeners to each navigation link
         navLinks.forEach(link => {
-            link.addEventListener('click', function(event) {
-                event.preventDefault();
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                hideAllSections();
 
+                const linkId = this.id;
                 let targetSectionId;
-                let elementToScrollToId = null;
 
-                if (link.id === 'home-link') {
-                    targetSectionId = 'home-section';
-                    currentPage = 1;
-                    filterAndPaginateProducts();
-                } else if (link.id === 'features-link') {
-                    targetSectionId = 'features-details';
-                } else if (link.id === 'about-link') {
-                    targetSectionId = 'about-details';
-                } else if (link.id === 'contact-link') {
-                    targetSectionId = 'contact-details';
-                } else if (link.id === 'cart-link') {
-                    targetSectionId = 'cart-section';
-                    renderCartItems();
-                } else if (link.id === 'wishlist-link') {
-                    targetSectionId = 'wishlist-section';
-                    renderWishlistItems();
-                } else if (link.id === 'account-link') {
-                    alert('Account page functionality to be added!'); // Placeholder for account page
-                    targetSectionId = 'home-section'; // Or redirect to login/profile page
-                } else if (link.id === 'search-link') {
-                    targetSectionId = 'home-section'; // Search bar is on home section
-                    elementToScrollToId = 'product-search'; // Scroll to the search input
+                switch (linkId) {
+                    case 'home-link':
+                        targetSectionId = 'home-section';
+                        break;
+                    case 'features-link':
+                        targetSectionId = 'features-details';
+                        break;
+                    case 'about-link':
+                        targetSectionId = 'about-details';
+                        break;
+                    case 'contact-link':
+                        targetSectionId = 'contact-details';
+                        break;
+                    case 'account-link':
+                        // No specific account section provided, could lead to a login/profile page
+                        alert('Account section coming soon!');
+                        targetSectionId = 'home-section'; // Stay on home for now
+                        break;
+                    case 'search-link':
+                        targetSectionId = 'home-section'; // Search bar is on home section
+                        // Scroll to search input
+                        setTimeout(() => {
+                            document.getElementById('product-search').focus();
+                        }, 100);
+                        break;
+                    case 'cart-link':
+                        targetSectionId = 'cart-section';
+                        renderCartItems();
+                        break;
+                    case 'wishlist-link':
+                        targetSectionId = 'wishlist-section';
+                        renderWishlistItems();
+                        break;
+                    default:
+                        targetSectionId = 'home-section';
                 }
-
-                showSectionAndScroll(targetSectionId, elementToScrollToId);
+                document.getElementById(targetSectionId).classList.remove('hidden-section');
             });
         });
 
-        // Add event listeners for new footer navigation links
-        if (footerAboutLink) {
-            footerAboutLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                showSectionAndScroll('about-details'); // Just show About section
-            });
-        }
-        if (footerFeaturesLink) {
-            footerFeaturesLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                showSectionAndScroll('features-details'); // Just show Features section
-            });
-        }
-        if (footerFoundersLink) {
-            footerFoundersLink.addEventListener('click', function(event) {
-                event.preventDefault();
-                showSectionAndScroll('about-details', 'founders-section'); // Show About, then scroll to founders
-            });
-        }
-
-
-        // Add event listeners to the "Explore Collections" button
         exploreCollectionsBtn.addEventListener('click', function() {
             hideAllSections();
             document.getElementById('home-section').classList.remove('hidden-section');
-            currentPage = 1;
-            document.querySelector('.filter-button[data-category="all"]').click();
-            document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' });
+            // Scroll to the "Our Full Collection" section
+            document.getElementById('product-search').scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Add event listeners to all close buttons
-        const closeButtons = document.querySelectorAll('.close-button');
-        closeButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                const parentSection = button.closest('section');
-                if (parentSection) {
-                    parentSection.classList.add('hidden-section');
-                }
-                document.getElementById('home-section').classList.remove('hidden-section');
-                document.getElementById('home-section').scrollIntoView({ behavior: 'smooth' });
-                filterAndPaginateProducts();
-            });
-        });
-
-        // Add event listeners to filter buttons
         filterButtons.forEach(button => {
             button.addEventListener('click', function() {
                 filterButtons.forEach(btn => btn.classList.remove('active'));
                 this.classList.add('active');
-                currentPage = 1;
+                currentPage = 1; // Reset to first page on category change
                 filterAndPaginateProducts();
             });
         });
 
-        // Event listener for search input
-        productSearchInput.addEventListener('keyup', () => {
-            currentPage = 1;
+        productSearchInput.addEventListener('input', () => {
+            currentPage = 1; // Reset to first page on search
             filterAndPaginateProducts();
         });
 
-        // Function to attach event listeners to dynamically created product buttons
-        function addEventListenersToProductButtons() {
-            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-                button.onclick = (event) => {
-                    event.stopPropagation();
-                    addToCart(button.dataset.productId);
-                };
+        document.querySelectorAll('.close-button').forEach(button => {
+            button.addEventListener('click', function() {
+                hideAllSections();
+                document.getElementById('home-section').classList.remove('hidden-section');
             });
-            document.querySelectorAll('.wishlist-btn').forEach(button => {
-                button.onclick = (event) => {
-                    event.stopPropagation();
-                    toggleWishlist(button.dataset.productId);
-                };
-            });
-            document.querySelectorAll('.remove-from-cart-btn').forEach(button => {
-                button.onclick = () => removeFromCart(button.dataset.productId);
-            });
-            document.querySelectorAll('.add-to-cart-from-wishlist-btn').forEach(button => {
-                button.onclick = () => {
-                    addToCart(button.dataset.productId);
-                    toggleWishlist(button.dataset.productId);
-                };
-            });
-            document.querySelectorAll('.remove-from-wishlist-btn').forEach(button => {
-                button.onclick = () => toggleWishlist(button.dataset.productId);
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            hideAllSections();
-            document.getElementById('home-section').classList.remove('hidden-section');
-            document.querySelector('.filter-button[data-category="all"]').click();
-            updateCartCount();
-            updateWishlistCount();
         });
+
+        // Footer links to main sections
+        footerAboutLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('about-details').classList.remove('hidden-section');
+            document.getElementById('about-details').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        footerFeaturesLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('features-details').classList.remove('hidden-section');
+            document.getElementById('features-details').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        footerFoundersLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            hideAllSections();
+            document.getElementById('about-details').classList.remove('hidden-section');
+            document.getElementById('founders-section').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Initial render
+        updateCartCount();
+        updateWishlistCount();
+        filterAndPaginateProducts(); // Initial render of products and pagination
+        hideAllSections();
+        document.getElementById('home-section').classList.remove('hidden-section');
     </script>
 </body>
 </html>

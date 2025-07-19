@@ -98,6 +98,26 @@
             color: white;
             border-color: var(--primary-color);
         }
+
+        /* Styling for the welcome text and button section */
+        #welcome-text-section {
+            text-align: center;
+            padding: 2rem; /* Add padding to this section */
+            margin-bottom: 2.5rem; /* Space between text and slideshow */
+        }
+
+        /* Styling for the slideshow banner */
+        #slideshow-banner {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 400px; /* Adjust height as needed */
+            width: 100%; /* Ensure it takes full width of its container */
+            border-radius: 0.5rem; /* Match other rounded elements */
+            overflow: hidden; /* Important for clean edges if images are slightly off */
+            transition: background-image 1s ease-in-out; /* Smooth transition for background image */
+            margin-bottom: 2.5rem; /* Space below the slideshow */
+        }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -139,7 +159,8 @@
 
     <main class="flex-grow container mx-auto p-6">
         <section id="home-section" class="bg-white rounded-xl shadow-xl p-8 mb-10">
-            <div class="text-center transform transition duration-500 hover:scale-105 mb-12">
+
+            <div id="welcome-text-section">
                 <h2 class="text-5xl font-extrabold mb-4" style="color: var(--primary-color);">Welcome to Stay Styled!</h2>
                 <p class="text-xl mb-6 max-w-3xl mx-auto" style="color: var(--primary-color);">
                     If you're a Pinterest enthusiast looking to recreate every dream outfit, then congratulations!
@@ -150,7 +171,10 @@
                 </button>
             </div>
 
-            <div class="mb-12">
+            <div id="slideshow-banner" class="rounded-xl shadow-xl">
+                </div>
+
+            <div class="mb-12 mt-8">
                 <h3 class="text-4xl font-extrabold mb-8 text-center" style="color: var(--primary-color);">Our Top Picks</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
@@ -437,6 +461,7 @@
         const collectionGrid = document.getElementById('collection-grid');
         const productSearchInput = document.getElementById('product-search');
         const exploreCollectionsBtn = document.getElementById('explore-collections-btn');
+        const slideshowBanner = document.getElementById('slideshow-banner'); // Renamed from welcome-hero-banner
 
         // Cart and Wishlist elements
         const cartCountSpan = document.getElementById('cart-count');
@@ -456,6 +481,32 @@
 
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+        // --- Image Slideshow for the new banner position ---
+        const backgroundImages = [
+            'images/slideshow_image_1.jpg',
+            'images/slideshow_image_2.jpg',
+            'images/slideshow_image_3.jpg',
+            'images/slideshow_image_4.jpg',
+            'images/slideshow_image_5.jpg',
+            'images/slideshow_image_6.jpg',
+            'images/slideshow_image_7.jpg',
+            'images/slideshow_image_8.jpg' // Reduced to 8 images
+        ];
+        let currentImageIndex = 0;
+
+        function changeBackgroundImage() {
+            if (slideshowBanner) {
+                slideshowBanner.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+            }
+        }
+
+        // Set initial background image and start the slideshow
+        if (slideshowBanner) {
+            changeBackgroundImage(); // Set the first image immediately
+            setInterval(changeBackgroundImage, 2500); // Change every 2.5 seconds (2500ms)
+        }
 
         // --- Core Functions ---
 
@@ -702,6 +753,20 @@
         }
 
         function addEventListenersToWishlistButtons() {
+            document.querySelectorAll('.add-to-cart-from-wishlist-btn').forEach(button => {
+                button.onclick = (e) => {
+                    const productId = e.currentTarget.dataset.productId;
+                    const product = allProducts.find(p => p.id === productId);
+                    if (product && !cart.some(item => item.id === productId)) {
+                        cart.push(product);
+                        updateCartCount();
+                        alert(`${product.name} added to cart!`);
+                    } else if (product) {
+                        alert(`${product.name} is already in your cart.`);
+                    }
+                };
+            });
+
             document.querySelectorAll('.remove-from-wishlist-btn').forEach(button => {
                 button.onclick = (e) => {
                     const productId = e.currentTarget.dataset.productId;
@@ -715,20 +780,6 @@
                         productCardWishlistButton.classList.add('fa-regular');
                     }
                     alert('Item removed from wishlist.');
-                };
-            });
-
-            document.querySelectorAll('.add-to-cart-from-wishlist-btn').forEach(button => {
-                button.onclick = (e) => {
-                    const productId = e.currentTarget.dataset.productId;
-                    const product = allProducts.find(p => p.id === productId);
-                    if (product && !cart.some(item => item.id === productId)) {
-                        cart.push(product);
-                        updateCartCount();
-                        alert(`${product.name} added to cart!`);
-                    } else if (product) {
-                        alert(`${product.name} is already in your cart.`);
-                    }
                 };
             });
         }

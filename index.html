@@ -122,6 +122,41 @@
             height: 256px; /* A fixed height is necessary for consistent layout */
             width: 100%;
         }
+
+        /* Styles for the coming soon popup */
+        #coming-soon-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 3rem 4rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            border: 2px solid var(--primary-color);
+            display: none; /* Initially hidden */
+        }
+
+        #coming-soon-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            display: none; /* Initially hidden */
+        }
+        
+        #coming-soon-message {
+            font-family: 'Dancing Script', cursive; /* Elegant, cursive font */
+            font-size: 3rem;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
@@ -275,7 +310,7 @@
         <section id="about-details" class="hidden-section bg-white rounded-xl shadow-xl p-8 mt-10 max-w-3xl mx-auto">
             <h2 class="text-4xl font-extrabold mb-4 text-center" style="color: var(--primary-color);">About Stay Styled</h2>
             <p class="text-lg mb-4" style="color: var(--primary-color);">
-                Stay Styled was founded in 2020 with a vision to make high-fashion accessible to everyone.
+                Stay Styled was founded in 2025 with a vision to make high-fashion accessible to everyone.
                 We believe that style is a form of self-expression and should be celebrated by all.
             </p>
             <p class="text-lg mb-4" style="color: var(--primary-color);">
@@ -329,43 +364,43 @@
                 <div>
                     <h4 class="font-bold text-lg mb-4">HELP</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:underline">Client Advisor: 1800 103 9988</a></li>
-                        <li><a href="#" class="hover:underline">Chat or Email Us</a></li>
-                        <li><a href="#" class="hover:underline">FAQ</a></li>
-                        <li><a href="#" class="hover:underline">Product Care</a></li>
-                        <li><a href="#" class="hover:underline">Stores</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Client Advisor: 1800 103 9988</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Chat or Email Us</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">FAQ</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Product Care</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Stores</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold text-lg mb-4">SHOP</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:underline">New Arrivals</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">New Arrivals</a></li>
                         <li><a href="#collection-grid" class="hover:underline">Dresses</a></li>
                         <li><a href="#collection-grid" class="hover:underline">Tops</a></li>
                         <li><a href="#collection-grid" class="hover:underline">Bottoms</a></li>
                         <li><a href="#collection-grid" class="hover:underline">Accessories</a></li>
-                        <li><a href="#" class="hover:underline">Flats & Platforms</a></li>
-                        <li><a href="#" class="hover:underline">T-Shirts</a></li>
-                        <li><a href="#" class="hover:underline">Trousers</a></li>
-                        <li><a href="#" class="hover:underline">Oxfords & Boots</a></li>
-                        <li><a href="#" class="hover:underline">Heels & Platforms</a></li>
-                        <li><a href="#" class="hover:underline">Matching Sets</a></li>
-                        <li><a href="#" class="hover:underline">Best Selling</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Flats & Platforms</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">T-Shirts</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Trousers</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Oxfords & Boots</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Heels & Platforms</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Matching Sets</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Best Selling</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold text-lg mb-4">SUPPORT & SERVICES</h4>
                     <ul class="space-y-2 text-sm">
-                        <li><a href="#" class="hover:underline">Exchanges</a></li>
-                        <li><a href="#" class="hover:underline">Exchange Policy</a></li>
-                        <li><a href="#" class="hover:underline">Repairs</a></li>
-                        <li><a href="#" class="hover:underline">Personalisation</a></li>
-                        <li><a href="#" class="hover:underline">Art of Gifting</a></li>
-                        <li><a href="#" class="hover:underline">Shipping</a></li>
-                        <li><a href="#" class="hover:underline">Download our App</a></li>
-                        <li><a href="#" class="hover:underline">Support</a></li>
-                        <li><a href="#" class="hover:underline">Privacy Policy</a></li>
-                        <li><a href="#" class="hover:underline">Terms of Service</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Exchanges</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Exchange Policy</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Repairs</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Personalisation</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Art of Gifting</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Shipping</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Download our App</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Support</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Privacy Policy</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Terms of Service</a></li>
                     </ul>
                 </div>
                 <div>
@@ -373,14 +408,14 @@
                     <ul class="space-y-2 text-sm">
                         <li><a id="footer-about-link" href="#" class="hover:underline">Our Story</a></li>
                         <li><a id="footer-features-link" href="#" class="hover:underline">Features</a></li>
-                        <li><a href="#" class="hover:underline">Sustainability</a></li>
-                        <li><a href="#" class="hover:underline">Latest News</a></li>
-                        <li><a href="#" class="hover:underline">Careers</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Sustainability</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Latest News</a></li>
+                        <li><a href="#" class="coming-soon-link hover:underline">Careers</a></li>
                         <li><a id="footer-founders-link" href="#" class="hover:underline">Founders</a></li>
                     </ul>
                     <h4 class="font-bold text-lg mt-6 mb-4">CONNECT</h4>
                     <p class="text-sm mb-4">Sign up for our emails to get the latest news, exclusive launches, and collections.</p>
-                    <button class="font-bold py-2 px-4 rounded-full text-xs transition duration-300" style="background-color: var(--primary-color); color: white; border: 1px solid white; hover:background-color: var(--light-hover);">Sign Up for Emails</button>
+                    <button id="coming-soon-email" class="font-bold py-2 px-4 rounded-full text-xs transition duration-300" style="background-color: var(--primary-color); color: white; border: 1px solid white; hover:background-color: var(--light-hover);">Sign Up for Emails</button>
                     <div class="mt-4">
                         <h5 class="font-semibold text-sm mb-2">Follow Us:</h5>
                         <div class="flex space-x-3 text-xl">
@@ -420,6 +455,14 @@
             </div>
         </div>
     </footer>
+
+    <div id="coming-soon-popup-overlay"></div>
+    <div id="coming-soon-popup">
+        <p id="coming-soon-message">Coming Soon!</p>
+        <button id="close-popup-btn" class="mt-6 font-bold py-2 px-6 rounded-full transition duration-300 ease-in-out" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);">
+            Close
+        </button>
+    </div>
 
     <script>
         const ITEMS_PER_PAGE = 30;
@@ -532,6 +575,10 @@
         const footerAboutLink = document.getElementById('footer-about-link');
         const footerFeaturesLink = document.getElementById('footer-features-link');
         const footerFoundersLink = document.getElementById('footer-founders-link');
+        const comingSoonLinks = document.querySelectorAll('.coming-soon-link, #coming-soon-email');
+        const popupOverlay = document.getElementById('coming-soon-popup-overlay');
+        const popup = document.getElementById('coming-soon-popup');
+        const closePopupBtn = document.getElementById('close-popup-btn');
 
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
@@ -689,22 +736,32 @@
             }, 1500); /* Adjusted to 1.5 seconds */
         }
 
-        document.querySelectorAll('nav a, .close-button, #explore-collections-btn, footer a').forEach(link => {
+        function showComingSoonPopup() {
+            popupOverlay.style.display = 'block';
+            popup.style.display = 'block';
+        }
+
+        function hideComingSoonPopup() {
+            popupOverlay.style.display = 'none';
+            popup.style.display = 'none';
+        }
+
+        document.querySelectorAll('nav a, .close-button, #explore-collections-btn, #footer-about-link, #footer-features-link, #footer-founders-link').forEach(link => {
             link.addEventListener('click', (event) => {
                 event.preventDefault();
                 const targetId = event.currentTarget.id;
                 let sectionToShow = 'home-section';
                 let scrollToProducts = false;
 
-                if (targetId === 'cart-link' || event.currentTarget.closest('#cart-section')) {
+                if (targetId === 'cart-link') {
                     sectionToShow = 'cart-section';
                     updateCartDisplay();
-                } else if (targetId === 'wishlist-link' || event.currentTarget.closest('#wishlist-section')) {
+                } else if (targetId === 'wishlist-link') {
                     sectionToShow = 'wishlist-section';
                     updateWishlistDisplay();
                 } else if (targetId === 'features-link' || targetId === 'footer-features-link') {
                     sectionToShow = 'features-details';
-                } else if (targetId === 'about-link' || targetId === 'footer-about-link' || targetId === 'footer-founders-link') {
+                } else if (targetId === 'about-link' || targetId === 'footer-about-link') {
                     sectionToShow = 'about-details';
                 } else if (targetId === 'contact-link') {
                     sectionToShow = 'contact-details';
@@ -713,6 +770,14 @@
                     scrollToProducts = true;
                 } else if (event.currentTarget.classList.contains('close-button') || targetId === 'home-link') {
                     sectionToShow = 'home-section';
+                } else if (targetId === 'footer-founders-link') {
+                    sectionToShow = 'about-details';
+                    setTimeout(() => {
+                        const foundersSection = document.getElementById('founders-section');
+                        if (foundersSection) {
+                            window.scrollTo({ top: foundersSection.offsetTop, behavior: 'smooth' });
+                        }
+                    }, 100);
                 }
 
                 showSection(sectionToShow);
@@ -723,6 +788,16 @@
                 }
             });
         });
+
+        comingSoonLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                showComingSoonPopup();
+            });
+        });
+
+        closePopupBtn.addEventListener('click', hideComingSoonPopup);
+        popupOverlay.addEventListener('click', hideComingSoonPopup);
 
         filterButtons.forEach(button => {
             button.addEventListener('click', (event) => {

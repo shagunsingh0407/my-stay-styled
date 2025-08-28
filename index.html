@@ -30,7 +30,7 @@
         /* Style for active filter button */
         .filter-button.active {
             background-color: var(--primary-color); /* Primary color for active state */
-            color: white;
+            color: white !important; /* Force white text color for active state */
             border-color: var(--primary-color);
         }
         /* Basic hover effect for collection items */
@@ -40,12 +40,6 @@
         .collection-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1); /* Slightly less intense shadow */
-        }
-        /* Override Tailwind's default placeholder image colors for consistency */
-        /* This rule can be removed once all placeholders are replaced */
-        img[src*="via.placeholder.com"] {
-            background-color: var(--placeholder-bg); /* Light gray for placeholder background */
-            color: var(--placeholder-text); /* Dark gray for placeholder text */
         }
         /* Search bar styling */
         .search-bar-container {
@@ -109,15 +103,24 @@
 
         /* Styling for the slideshow banner */
         #slideshow-banner {
-            background-size: cover;
+            background-size: contain;
             background-position: center;
             background-repeat: no-repeat;
             min-height: 400px; /* Adjust height as needed */
             width: 100%; /* Ensure it takes full width of its container */
             border-radius: 0.5rem; /* Match other rounded elements */
             overflow: hidden; /* Important for clean edges if images are slightly off */
-            transition: background-image 1s ease-in-out; /* Smooth transition for background image */
+            transition: background-image 0.5s ease-in-out; /* Smooth transition for background image */
             margin-bottom: 2.5rem; /* Space below the slideshow */
+        }
+
+        /* Styles to make images fit without cropping */
+        .collection-item img,
+        .top-picks img,
+        .wishlist-item img {
+            object-fit: contain;
+            height: 256px; /* A fixed height is necessary for consistent layout */
+            width: 100%;
         }
     </style>
 </head>
@@ -150,7 +153,7 @@
                     <li><a id="about-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out">About</a></li>
                     <li><a id="contact-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out">Contact</a></li>
                     <li><a id="account-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-user"></i> Account</a></li>
-                    <li><a id="search-link" href="#product-search" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-search"></i> Search</a></li>
+                    <li><a id="search-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-search"></i> Search</a></li>
                     <li><a id="cart-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-cart-shopping"></i> Cart (<span id="cart-count">0</span>)</a></li>
                     <li><a id="wishlist-link" href="#" class="hover:text-gray-200 transition duration-300 ease-in-out"><i class="fa-solid fa-heart"></i> Wishlist (<span id="wishlist-count">0</span>)</a></li>
                 </ul>
@@ -173,23 +176,23 @@
             </div>
 
             <div id="slideshow-banner" class="rounded-xl shadow-xl">
-                </div>
+            </div>
 
             <div class="mb-12 mt-8">
                 <h3 class="text-4xl font-extrabold mb-8 text-center" style="color: var(--primary-color);">Our Top Picks</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="Images/summer_vibes.jpg" alt="Summer Vibes Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <img src="Images/summer_vibes.jpg" alt="Summer Vibes Collection" class="rounded-md mb-4 mx-auto w-full top-picks">
                         <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Summer Vibes Collection</h4>
                         <p class="text-center" style="color: var(--primary-color);">Light fabrics and vibrant colors for a perfect summer.</p>
                     </div>
                     <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="Images/cozy_essentials.jpg" alt="Cozy Essentials Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <img src="Images/cozy_essentials.jpg" alt="Cozy Essentials Collection" class="rounded-md mb-4 mx-auto w-full top-picks">
                         <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Cozy Essentials</h4>
                         <p class="text-center" style="color: var(--primary-color);">Comfort meets style with our softest autumn collection.</p>
                     </div>
                     <div class="bg-white rounded-lg p-6 shadow-md hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1">
-                        <img src="Images/evening_glam.jpg" alt="Evening Glam Collection" class="rounded-md mb-4 mx-auto w-full">
+                        <img src="Images/evening_glam.jpg" alt="Evening Glam Collection" class="rounded-md mb-4 mx-auto w-full top-picks">
                         <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Evening Glam</h4>
                         <p class="text-center" style="color: var(--primary-color);">Dazzle at any event with our elegant evening wear.</p>
                     </div>
@@ -213,10 +216,10 @@
                 </div>
 
                 <div id="collection-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-                    </div>
+                </div>
 
                 <div id="pagination-controls" class="flex justify-center space-x-2 mt-8">
-                    </div>
+                </div>
             </div>
         </section>
 
@@ -288,13 +291,13 @@
                 <h3 class="text-3xl font-extrabold mb-6 text-center" style="color: var(--primary-color);">Meet Our Founder</h3>
                 <div class="flex flex-col md:flex-row items-center md:space-x-8">
                     <div class="md:w-1/3 mb-6 md:mb-0">
-                        <img src="Images/founder_picture.jpg" alt="Your Name" class="rounded-full w-48 h-48 object-cover mx-auto shadow-md">
+                        <img src="Images/founder_picture.jpg" alt="Shagun Singh" class="rounded-full w-48 h-48 object-cover mx-auto shadow-md">
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);"> [Your Name Here]</h4>
-                        <p class="text-lg mb-3" style="color: var(--primary-color);">**Founder & CEO**</p>
+                        <h4 class="text-2xl font-semibold mb-2" style="color: var(--primary-color);">Shagun Singh</h4>
+                        <p class="text-lg mb-3" style="color: var(--primary-color);">Founder & CEO</p>
                         <p style="color: var(--primary-color);">
-                            [Your Name] envisioned Stay Styled as a platform to bridge the gap between aspirational fashion and everyday accessibility. With a keen eye for trends and a passion for empowering individuals through style, [Your Name] leads the brand's creative direction and commitment to customer satisfaction. [Add a short bio about yourself, your vision, or what inspired you to start this.]
+                            Ms. Shagun envisioned Stay Styled as a platform to bridge the gap between aspirational fashion and everyday accessibility. With a keen eye for trends and a passion for empowering individuals through style, She leads the brand's creative direction and commitment to customer satisfaction. 
                         </p>
                     </div>
                 </div>
@@ -419,38 +422,88 @@
     </footer>
 
     <script>
-        const ITEMS_PER_PAGE = 30; // Define how many items per page
-        let currentPage = 1; // Start on the first page
-
-        // Centralized Product Data (placeholder generation)
+        const ITEMS_PER_PAGE = 30;
+        let currentPage = 1;
+        let isInitialLoad = true;
         const allProducts = [];
 
-        // Function to generate dummy products for demonstration
-        function generateDummyProducts(category, count, startPrice, priceRange) {
-            for (let i = 1; i <= count; i++) {
+        function generateDummyProducts(category, filenames, startPrice, priceRange) {
+            for (let i = 0; i < filenames.length; i++) {
+                const filename = filenames[i];
                 const idPrefix = category.charAt(0);
+                const name = filename.replace(/_/g, ' ').replace(/\.jpg$/, '').replace(/&/g, 'and').replace(/piqu\u00e9/g, 'Pique').split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
                 allProducts.push({
-                    id: `${idPrefix}-${i}`,
-                    name: `${category.charAt(0).toUpperCase() + category.slice(1)} Item ${i}`,
+                    id: `${idPrefix}-${i + 1}`,
+                    name: name,
                     description: `A stylish ${category} for all occasions.`,
                     price: Math.floor(Math.random() * priceRange) + startPrice,
                     category: category,
-                    // *** UPDATED: Pointing to local image files ***
-                    // Ensure you have an 'Images/products' folder with subfolders for each category
-                    // e.g., 'Images/products/dresses/dress_1.jpg', 'Images/products/tops/top_1.jpg'
-                    // You'll need to create these files!
-                    imageUrl: `Images/products/${category}/${category}_${i}.jpg`
+                    imageUrl: `Images/products/${category}/${filename}.jpg`
                 });
             }
         }
 
-        // Generate 50+ items for each category
-        generateDummyProducts('dresses', 55, 1500, 1000);
-        generateDummyProducts('tops', 60, 800, 700);
-        generateDummyProducts('bottoms', 52, 1200, 800);
-        generateDummyProducts('accessories', 58, 300, 1000);
+        const dressNames = [
+            'vibrant_solid_cut_out_maxi_dress', 'utility_style_linen_blend_shirt_dress', 'structured_cotton_a_line_dress',
+            'solid_terracotta_cotton_sateen_fit_and_flare_midi_dress', 'solid_jewel_tone_satin_wrap_dress',
+            'scuba_fabric_fit_and_flare_dress', 'satin_maxi_slip_dress', 'red_satin_dress', 'red_bodycon_midi_dress',
+            'oversized_tunic_style_knit_dress', 'one_shoulder_ruffle_mini_dress', 'one_shoulder_embellished_gown',
+            'navy_ponte_knit_sheath_dress', 'navy_chiffon_a_line_gown', 'metallic_gold_satin_midi_slip_dress',
+            'mermaid_black_dress', 'medium_wash_long_sleeve_denim_shirt_dress', 'georgette_midi_dress_with_subtle_print',
+            'floral_print_mini_wrap_dress', 'floral_print_chiffon_a_line_midi_dress', 'fine_gauge_ribbed_knit_sweater_dress',
+            'emerald_green_velvet_sheath_dress', 'embellished_nettulle_cocktail_dress', 'dark_wash_a_line_denim_mini_dress',
+            'cream_linen_blend_blazer_dress', 'classic_black_satin_midi_slip_dress', 'classic_black_jersey_wrap_dress',
+            'classic_black_crepe_sheath_dress', 'classic_black_crepe_column_gown', 'chunky_knit_midi_sweater_dress',
+            'bold_geometric_print_wrap_dress', 'black_sequin_mini_dress', 'black_ribbed_knit_midi_dress_with_waist_cut_outs',
+            'black_double_breasted_blazer_dress',
+        ];
 
-        // Shuffle the products array once on load for random display
+        const topNames = [
+            'botanical_print_graphic_tee', 'classic_black_cotton_crew_neck', 'classic_black_cotton_v_neck', 'classic_white_cotton_crew_neck', 'classic_white_cotton_v_neck',
+            'heather_grey_cotton_blend_crew_neck', 'minimalist_line_abstract_graphic_tee', 'navy_blue_cotton_crew_neck', 'abstract_typography_quote_tee', 'oversized_black_cotton_tee',
+            'oversized_white_cotton_tee', 'seasonal_pastel_cotton_crew_neck', 'solid_jewel_tone_cotton_v_neck', 'red_cotton_v_neck', 'oversized_solid_tee',
+            'classic_white_cotton_ribbed_tank', 'classic_black_cotton_ribbed_tank', 'jewel_tone_satin_camisole', 'ribbed_knit_scoop_neck_tank', 'ribbed_knit_square_neck_tank',
+            'sporty_racerback_tank', 'black_satin_camisole', 'champagne_satin_camisole', 'blue_cotton_ribbed_tank', 'creme_cotton_ribbed_tank',
+            'blue_white_pinstripe_cotton_button_down', 'oversized_fit_cotton_button_down', 'solid_white_linen_blend_button_down', 'solid_pastel_linen_blend_button_down', 'solid_black_viscose_button_down',
+            'black_fine_gauge_knit_crew_neck', 'medium_wash_classic_denim_shirt', 'multi_color_vertical_stripe_cotton_button_down', 'white_button_down', 'light_grey_fine_gauge_knit_crew_neck',
+            'camel_fine_gauge_knit_crew_neck', 'navy_cotton_pique_polo_shirt', 'white_cotton_pique_polo_shirt', 'off_white_chiffon_blouse', 'black_chiffon_blouse',
+            'abstract_print_georgette_blouse', 'white_cotton_poplin_puff_sleeve_blouse', 'solid_deep_burgundy_wrap_blouse', 'subtle_floral_print_puff_sleeve_blouse', 'one_shoulder_blouse',
+            'black_off_shoulder_blouse', 'ribbed_knit_crew_neck_crop_top', 'classic_light_grey_marl_crew_neck_sweatshirt', 'printed_mesh_top', 'black_sheer_mesh_top',
+            'black_lace_trimmed_or_sheer_mesh_bodysuit', 'tan_short_sleeve_spandex_bodysuit', 'black_long_sleeve_cotton_spandex_bodysuit', 'black_cotton_t_shirt_crop', 'linen_blend_tie_front_crop_blouse',
+            'muted_tone_crew_neck_sweatshirt', 'dramatic_ruffle_sleeve_blouse', 'off_white_cotton_hoodie', 'bold_abstract_print_blouse'
+        ];
+        
+        const bottomsNames = [
+            'medium_wash_boyfriend_jeans', 'ecru_off_white_wide_leg_jeans', 'classic_blue_straight_leg_jeans',
+            'medium_wash_mid_rise_flare_jeans', 'medium_wash_mom_jeans', 'dark_blue_stretch_slim_fit_jeans',
+            'ecru_cream_straight_leg_jeans', 'dark_wash_relaxed_fit_jeans', 'light_blue_mom_jeans',
+            'black_tailored_straight_leg_trousers', 'beige_khaki_linen_blend_wide_leg_trousers',
+            'black_straight_leg_jeans', 'dark_blue_high_waisted_straight_leg_jeans', 'black_high_waisted_skinny_jeans',
+            'black_washed_mom_jeans', 'olive_green_cotton_twill_cargo_pants', 'striped_fluid_wide_leg_trousers',
+            'lightweight_printed_wide_leg_trousers', 'denim_cargo_jeans', 'beige_lightweight_cargo_joggers',
+            'black_drapey_wide_leg_trousers', 'high_waisted_wide_leg_jeans_dark_wash', 'high_waisted_wide_leg_jeans_medium_wash',
+        ];
+
+        const accessoriesNames = [
+            'black_classic_vegan_leather_crossbody', 'neutral_structured_crossbody', 'padded_quilted_crossbody', 'pop_color_crossbody', 'canvas_nylon_utility_crossbody',
+            'black_hobo_shoulder_bag', 'structured_vegan_leather_shoulder_bag', 'woven_textured_shoulder_bag', 'metallic_mini_shoulder_bag', 'classic_black_vegan_leather_tote',
+            'canvas_tote_bag', 'soft_slouchy_vegan_leather_tote', 'black_satin_velvet_pouch_clutch', 'embellished_clutch', 'woven_knitted_clutch',
+            'structured_mini_top_handle_bag', 'micro_bag', 'slim_vegan_leather_cardholder', 'delicate_layering_chain_set', 'chunky_chain_necklace',
+            'pendant_necklace', 'lariat_necklace', 'choker_necklace', 'initial_zodiac_sign_pendant_necklace', 'gold_tone_hoop_earrings',
+            'silver_tone_hoop_earrings', 'pearl_stud_earrings', 'minimalist_metal_studs', 'statement_drop_earrings', 'sparkling_studs',
+            'ear_cuff_non_pierced_set', 'delicate_chain_bracelet', 'stackable_beaded_bracelets', 'simple_cuff_bracelet', 'stackable_ring_set',
+            'bold_cocktail_ring', 'silk_satin_square_scarf', 'lightweight_cotton_viscose_scarf', 'bandana', 'large_claw_clip',
+            'medium_claw_clip', 'set_of_decorative_snap_clips_barrettes', 'knotted_fabric_headband', 'thin_metal_headband', 'classic_black_cat_eye_sunglasses',
+            'modern_oversized_square_sunglasses', 'retro_round_oval_sunglasses', 'aviator_style_sunglasses', 'black_belt', 'brown_tan_belt',
+            'wide_elastic_stretch_cinch_belt', 'neutral_cotton_baseball_cap', 'cotton_twill_bucket_hat', 'wide_brim_straw_hat', 'sheer_ankle_socks',
+            'ribbed_knit_ankle_socks', 'chunky_resin_acrylic_keychain', 'plush_faux_fur_bag_charm'
+        ];
+
+        generateDummyProducts('dresses', dressNames, 1500, 1000);
+        generateDummyProducts('tops', topNames, 800, 700);
+        generateDummyProducts('bottoms', bottomsNames, 1200, 800);
+        generateDummyProducts('accessories', accessoriesNames, 300, 1000);
+
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -459,16 +512,14 @@
         }
         shuffleArray(allProducts);
 
-        // Get references to DOM elements
         const navLinks = document.querySelectorAll('nav a');
         const contentSections = document.querySelectorAll('main section');
         const filterButtons = document.querySelectorAll('.filter-button');
         const collectionGrid = document.getElementById('collection-grid');
         const productSearchInput = document.getElementById('product-search');
         const exploreCollectionsBtn = document.getElementById('explore-collections-btn');
-        const slideshowBanner = document.getElementById('slideshow-banner'); // Renamed from welcome-hero-banner
+        const slideshowBanner = document.getElementById('slideshow-banner');
 
-        // Cart and Wishlist elements
         const cartCountSpan = document.getElementById('cart-count');
         const wishlistCountSpan = document.getElementById('wishlist-count');
         const cartItemsDiv = document.getElementById('cart-items');
@@ -478,378 +529,280 @@
         const emptyWishlistMessage = document.getElementById('empty-wishlist-message');
         const paginationControls = document.getElementById('pagination-controls');
 
-        // New footer links
         const footerAboutLink = document.getElementById('footer-about-link');
         const footerFeaturesLink = document.getElementById('footer-features-link');
         const footerFoundersLink = document.getElementById('footer-founders-link');
 
-
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let wishlist = JSON.parse(localStorage.getItem('wishlist')) || [];
 
-        // --- Image Slideshow for the new banner position ---
-        const backgroundImages = [
-            'Images/slideshow_image_1.jpg', // Standardized to 'Images/'
-            'Images/slideshow_image_2.jpg',
-            'Images/slideshow_image_3.jpg',
-            'Images/slideshow_image_4.jpg',
-            'Images/slideshow_image_5.jpg',
-            'Images/slideshow_image_6.jpg',
-            'Images/slideshow_image_7.jpg',
-            'Images/slideshow_image_8.jpg'
-        ];
-        let currentImageIndex = 0;
-
-        function changeBackgroundImage() {
-            if (slideshowBanner) {
-                slideshowBanner.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
-                currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
-            }
-        }
-
-        // Set initial background image and start the slideshow
-        if (slideshowBanner) {
-            changeBackgroundImage(); // Set the first image immediately
-            setInterval(changeBackgroundImage, 2500); // Change every 2.5 seconds (2500ms)
-        }
-
-        // --- Core Functions ---
-
-        function hideAllSections() {
-            contentSections.forEach(section => {
-                section.classList.add('hidden-section');
-            });
-        }
-
-        function renderProducts(productsToDisplay) {
+        function renderProducts(products) {
             collectionGrid.innerHTML = '';
-            if (productsToDisplay.length === 0) {
-                collectionGrid.innerHTML = '<p class="text-center col-span-full" style="color: var(--primary-color);">No items found matching your criteria.</p>';
+            if (products.length === 0) {
+                collectionGrid.innerHTML = `<p class="text-center w-full mt-8 text-xl" style="color: var(--primary-color);">No products found matching your criteria.</p>`;
                 return;
             }
-
-            productsToDisplay.forEach(product => {
+            products.forEach(product => {
+                const isItemInWishlist = wishlist.some(item => item.id === product.id);
+                const isItemInCart = cart.some(item => item.id === product.id);
                 const productCard = document.createElement('div');
-                productCard.classList.add('collection-item', 'bg-white', 'rounded-lg', 'p-4', 'shadow-sm', 'border', 'border-gray-300');
-                productCard.setAttribute('data-category', product.category);
-                productCard.setAttribute('data-name', product.name.toLowerCase());
-
-                const isInWishlist = wishlist.some(item => item.id === product.id);
-                const wishlistIconClass = isInWishlist ? 'fa-solid' : 'fa-regular';
-
+                productCard.classList.add('collection-item', 'bg-white', 'rounded-xl', 'shadow-md', 'p-4', 'flex', 'flex-col', 'items-center', 'text-center');
                 productCard.innerHTML = `
-                    <img src="${product.imageUrl}" alt="${product.name}" class="rounded-md mb-3 w-full h-48 object-cover">
-                    <h4 class="text-lg font-semibold mb-1" style="color: var(--primary-color);">${product.name}</h4>
-                    <p class="text-sm" style="color: var(--primary-color);">${product.description}</p>
-                    <p class="font-bold mt-2" style="color: var(--primary-color);">₹${product.price.toLocaleString('en-IN')}</p>
-                    <div class="flex justify-between items-center mt-3">
-                        <button class="add-to-cart-btn text-white text-sm font-semibold py-2 px-4 rounded-full transition duration-300" style="background-color: var(--primary-color); hover:background-color: var(--light-hover);" data-product-id="${product.id}">
-                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
+                    <img src="${product.imageUrl}" alt="${product.name}" class="rounded-lg w-full mb-4">
+                    <h4 class="text-xl font-semibold mb-1" style="color: var(--primary-color);">${product.name}</h4>
+                    <p class="text-sm text-gray-600 mb-2">${product.description}</p>
+                    <p class="text-2xl font-bold mb-4" style="color: var(--primary-color);">₹${product.price.toLocaleString('en-IN')}</p>
+                    <div class="flex space-x-2">
+                        <button class="add-to-cart-btn font-bold py-2 px-4 rounded-full transition-all duration-300 ${isItemInCart ? 'bg-green-500 text-white' : 'text-white'}" data-id="${product.id}" style="background-color: ${isItemInCart ? 'var(--light-hover)' : 'var(--primary-color)'};">
+                            <i class="fa-solid fa-cart-shopping"></i> ${isItemInCart ? 'Added' : 'Add to Cart'}
                         </button>
-                        <button class="wishlist-btn hover:text-gray-600 text-xl transition duration-300" style="color: var(--primary-color);" data-product-id="${product.id}">
-                            <i class="${wishlistIconClass} fa-heart"></i>
+                        <button class="add-to-wishlist-btn font-bold py-2 px-4 rounded-full border transition-all duration-300" data-id="${product.id}" style="color: ${isItemInWishlist ? 'white' : 'var(--primary-color)'}; border-color: ${isItemInWishlist ? 'var(--primary-color)' : 'var(--primary-color)'}; background-color: ${isItemInWishlist ? 'var(--primary-color)' : 'transparent'};">
+                            <i class="fa-solid fa-heart"></i>
                         </button>
                     </div>
                 `;
                 collectionGrid.appendChild(productCard);
             });
-            addEventListenersToProductButtons();
         }
 
-        function filterAndPaginateProducts() {
-            const activeCategoryButton = document.querySelector('.filter-button.active');
-            const selectedCategory = activeCategoryButton ? activeCategoryButton.dataset.category : 'all';
+        function renderPagination(filteredProducts) {
+            const totalPages = Math.ceil(filteredProducts.length / ITEMS_PER_PAGE);
+            paginationControls.innerHTML = '';
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement('button');
+                    button.classList.add('pagination-button', 'hover:bg-gray-200');
+                    button.textContent = i;
+                    if (i === currentPage) {
+                        button.classList.add('active');
+                    }
+                    button.addEventListener('click', () => {
+                        currentPage = i;
+                        filterAndRender(true);
+                    });
+                    paginationControls.appendChild(button);
+                }
+            }
+        }
+
+        function filterAndRender(scrollTo = false) {
+            const activeCategory = document.querySelector('.filter-button.active').dataset.category;
             const searchTerm = productSearchInput.value.toLowerCase().trim();
 
-            const filteredAndSearchedProducts = allProducts.filter(item => {
-                const matchesCategory = (selectedCategory === 'all' || item.category === selectedCategory);
-                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || item.description.toLowerCase().includes(searchTerm);
-                return matchesCategory && matchesSearch;
+            const filtered = allProducts.filter(product => {
+                const categoryMatch = activeCategory === 'all' || product.category === activeCategory;
+                const searchMatch = product.name.toLowerCase().includes(searchTerm) || product.description.toLowerCase().includes(searchTerm);
+                return categoryMatch && searchMatch;
             });
-
-            const totalPages = Math.ceil(filteredAndSearchedProducts.length / ITEMS_PER_PAGE);
-
-            if (currentPage > totalPages && totalPages > 0) {
-                currentPage = totalPages;
-            } else if (totalPages === 0) {
-                currentPage = 1;
-            }
 
             const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
             const endIndex = startIndex + ITEMS_PER_PAGE;
-            const productsToDisplay = filteredAndSearchedProducts.slice(startIndex, endIndex);
+            const paginatedProducts = filtered.slice(startIndex, endIndex);
 
-            renderProducts(productsToDisplay);
-            renderPaginationControls(totalPages);
-        }
-
-        function renderPaginationControls(totalPages) {
-            paginationControls.innerHTML = '';
-
-            // Previous Button
-            const prevButton = document.createElement('button');
-            prevButton.classList.add('pagination-button');
-            prevButton.textContent = 'Previous';
-            prevButton.disabled = currentPage === 1;
-            prevButton.addEventListener('click', () => {
-                if (currentPage > 1) {
-                    currentPage--;
-                    filterAndPaginateProducts();
-                }
-            });
-            paginationControls.appendChild(prevButton);
-
-            // Page Number Buttons
-            for (let i = 1; i <= totalPages; i++) {
-                const pageButton = document.createElement('button');
-                pageButton.classList.add('pagination-button');
-                if (i === currentPage) {
-                    pageButton.classList.add('active');
-                }
-                pageButton.textContent = i;
-                pageButton.addEventListener('click', () => {
-                    currentPage = i;
-                    filterAndPaginateProducts();
-                });
-                paginationControls.appendChild(pageButton);
+            renderProducts(paginatedProducts);
+            renderPagination(filtered);
+            
+            if (scrollTo) {
+                window.scrollTo({ top: document.getElementById('collection-grid').offsetTop - 50, behavior: 'smooth' });
             }
-
-            // Next Button
-            const nextButton = document.createElement('button');
-            nextButton.classList.add('pagination-button');
-            nextButton.textContent = 'Next';
-            nextButton.disabled = currentPage === totalPages || totalPages === 0;
-            nextButton.addEventListener('click', () => {
-                if (currentPage < totalPages) {
-                    currentPage++;
-                    filterAndPaginateProducts();
-                }
-            });
-            paginationControls.appendChild(nextButton);
         }
 
-        function updateCartCount() {
+        function showSection(sectionId) {
+            contentSections.forEach(section => {
+                section.classList.add('hidden-section');
+            });
+            document.getElementById(sectionId).classList.remove('hidden-section');
+        }
+
+        function updateCartDisplay() {
+            cartItemsDiv.innerHTML = '';
+            if (cart.length === 0) {
+                emptyCartMessage.classList.remove('hidden-section');
+                cartTotalSpan.textContent = '0';
+            } else {
+                emptyCartMessage.classList.add('hidden-section');
+                let total = 0;
+                cart.forEach(item => {
+                    total += item.price;
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('flex', 'items-center', 'space-x-4', 'p-4', 'border', 'rounded-lg', 'shadow-sm');
+                    itemDiv.innerHTML = `
+                        <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+                        <div class="flex-grow">
+                            <h4 class="font-semibold" style="color: var(--primary-color);">${item.name}</h4>
+                            <p class="text-sm text-gray-600">Price: ₹${item.price.toLocaleString('en-IN')}</p>
+                        </div>
+                        <button class="remove-from-cart-btn text-red-500 hover:text-red-700 transition" data-id="${item.id}">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    `;
+                    cartItemsDiv.appendChild(itemDiv);
+                });
+                cartTotalSpan.textContent = total.toLocaleString('en-IN');
+            }
             cartCountSpan.textContent = cart.length;
             localStorage.setItem('cart', JSON.stringify(cart));
         }
 
-        function updateWishlistCount() {
+        function updateWishlistDisplay() {
+            wishlistItemsDiv.innerHTML = '';
+            if (wishlist.length === 0) {
+                emptyWishlistMessage.classList.remove('hidden-section');
+            } else {
+                emptyWishlistMessage.classList.add('hidden-section');
+                wishlist.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('bg-white', 'rounded-lg', 'p-4', 'shadow-md', 'flex', 'flex-col', 'items-center', 'text-center', 'wishlist-item');
+                    itemDiv.innerHTML = `
+                        <img src="${item.imageUrl}" alt="${item.name}" class="rounded-lg w-full mb-4">
+                        <h4 class="text-lg font-semibold mb-1" style="color: var(--primary-color);">${item.name}</h4>
+                        <p class="text-xl font-bold mb-4" style="color: var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p>
+                        <div class="flex space-x-2">
+                            <button class="add-to-cart-btn font-bold py-2 px-4 rounded-full transition-all duration-300 text-white" data-id="${item.id}" style="background-color: var(--primary-color);">
+                                <i class="fa-solid fa-cart-shopping"></i> Add to Cart
+                            </button>
+                            <button class="remove-from-wishlist-btn text-red-500 hover:text-red-700 transition" data-id="${item.id}">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    `;
+                    wishlistItemsDiv.appendChild(itemDiv);
+                });
+            }
             wishlistCountSpan.textContent = wishlist.length;
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
         }
 
-        function renderCartItems() {
-            cartItemsDiv.innerHTML = '';
-            if (cart.length === 0) {
-                emptyCartMessage.classList.remove('hidden');
-                cartTotalSpan.textContent = '0';
-                return;
-            } else {
-                emptyCartMessage.classList.add('hidden');
-            }
+        const slideshowImages = [
+            'Images/slideshow/slide_1.jpg',
+            'Images/slideshow/slide_2.jpg',
+            'Images/slideshow/slide_3.jpg',
+            'Images/slideshow/slide_4.jpg'
+        ];
+        let currentSlide = 0;
 
-            let total = 0;
-            cart.forEach(item => {
-                total += item.price;
-                const cartItemDiv = document.createElement('div');
-                cartItemDiv.classList.add('flex', 'items-center', 'justify-between', 'p-3', 'bg-gray-50', 'rounded-lg', 'shadow-sm');
-                cartItemDiv.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
-                        <div>
-                            <h4 class="font-semibold" style="color: var(--primary-color);">${item.name}</h4>
-                            <p style="color: var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p>
-                        </div>
-                    </div>
-                    <button class="remove-from-cart-btn py-1 px-3 rounded-full text-sm" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);" data-product-id="${item.id}">
-                        <i class="fa-solid fa-trash"></i> Remove
-                    </button>
-                `;
-                cartItemsDiv.appendChild(cartItemDiv);
-            });
-            cartTotalSpan.textContent = total.toLocaleString('en-IN');
-            addEventListenersToCartButtons();
+        function startSlideshow() {
+            slideshowBanner.style.backgroundImage = `url('${slideshowImages[currentSlide]}')`;
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slideshowImages.length;
+                slideshowBanner.style.backgroundImage = `url('${slideshowImages[currentSlide]}')`;
+            }, 1500); /* Adjusted to 1.5 seconds */
         }
 
-        function renderWishlistItems() {
-            wishlistItemsDiv.innerHTML = '';
-            if (wishlist.length === 0) {
-                emptyWishlistMessage.classList.remove('hidden');
-                return;
-            } else {
-                emptyWishlistMessage.classList.add('hidden');
-            }
+        document.querySelectorAll('nav a, .close-button, #explore-collections-btn, footer a').forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = event.currentTarget.id;
+                let sectionToShow = 'home-section';
+                let scrollToProducts = false;
 
-            wishlist.forEach(item => {
-                const wishlistItemDiv = document.createElement('div');
-                wishlistItemDiv.classList.add('flex', 'items-center', 'justify-between', 'p-3', 'bg-gray-50', 'rounded-lg', 'shadow-sm');
-                wishlistItemDiv.innerHTML = `
-                    <div class="flex items-center space-x-4">
-                        <img src="${item.imageUrl}" alt="${item.name}" class="w-16 h-16 object-cover rounded-md">
-                        <div>
-                            <h4 class="font-semibold" style="color: var(--primary-color);">${item.name}</h4>
-                            <p style="color: var(--primary-color);">₹${item.price.toLocaleString('en-IN')}</p>
-                        </div>
-                    </div>
-                    <div class="flex space-x-2">
-                        <button class="add-to-cart-from-wishlist-btn py-1 px-3 rounded-full text-sm" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);" data-product-id="${item.id}">
-                            <i class="fa-solid fa-cart-plus"></i> Add to Cart
-                        </button>
-                        <button class="remove-from-wishlist-btn py-1 px-3 rounded-full text-sm" style="background-color: var(--primary-color); color: white; hover:background-color: var(--light-hover);" data-product-id="${item.id}">
-                            <i class="fa-solid fa-trash"></i> Remove
-                        </button>
-                    </div>
-                `;
-                wishlistItemsDiv.appendChild(wishlistItemDiv);
-            });
-            addEventListenersToWishlistButtons();
-        }
-
-
-        // --- Event Listeners ---
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                hideAllSections();
-
-                const linkId = this.id;
-                let targetSectionId;
-
-                switch (linkId) {
-                    case 'home-link':
-                        targetSectionId = 'home-section';
-                        break;
-                    case 'features-link':
-                        targetSectionId = 'features-details';
-                        break;
-                    case 'about-link':
-                        targetSectionId = 'about-details';
-                        break;
-                    case 'contact-link':
-                        targetSectionId = 'contact-details';
-                        break;
-                    case 'account-link':
-                        // No specific account section provided, could lead to a login/profile page
-                        alert('Account section coming soon!');
-                        targetSectionId = 'home-section'; // Stay on home for now
-                        break;
-                    case 'search-link':
-                        targetSectionId = 'home-section'; // Search bar is on home section
-                        // Scroll to search input
-                        setTimeout(() => {
-                            document.getElementById('product-search').focus();
-                        }, 100);
-                        break;
-                    case 'cart-link':
-                        targetSectionId = 'cart-section';
-                        renderCartItems();
-                        break;
-                    case 'wishlist-link':
-                        targetSectionId = 'wishlist-section';
-                        renderWishlistItems();
-                        break;
-                    default:
-                        targetSectionId = 'home-section';
+                if (targetId === 'cart-link' || event.currentTarget.closest('#cart-section')) {
+                    sectionToShow = 'cart-section';
+                    updateCartDisplay();
+                } else if (targetId === 'wishlist-link' || event.currentTarget.closest('#wishlist-section')) {
+                    sectionToShow = 'wishlist-section';
+                    updateWishlistDisplay();
+                } else if (targetId === 'features-link' || targetId === 'footer-features-link') {
+                    sectionToShow = 'features-details';
+                } else if (targetId === 'about-link' || targetId === 'footer-about-link' || targetId === 'footer-founders-link') {
+                    sectionToShow = 'about-details';
+                } else if (targetId === 'contact-link') {
+                    sectionToShow = 'contact-details';
+                } else if (targetId === 'explore-collections-btn' || targetId === 'search-link') {
+                    sectionToShow = 'home-section';
+                    scrollToProducts = true;
+                } else if (event.currentTarget.classList.contains('close-button') || targetId === 'home-link') {
+                    sectionToShow = 'home-section';
                 }
-                document.getElementById(targetSectionId).classList.remove('hidden-section');
-            });
-        });
 
-        exploreCollectionsBtn.addEventListener('click', function() {
-            hideAllSections();
-            document.getElementById('home-section').classList.remove('hidden-section');
-            // Scroll to the "Our Full Collection" section
-            document.getElementById('product-search').scrollIntoView({ behavior: 'smooth' });
+                showSection(sectionToShow);
+                if (scrollToProducts) {
+                    setTimeout(() => {
+                        window.scrollTo({ top: document.getElementById('collection-grid').offsetTop - 50, behavior: 'smooth' });
+                    }, 100);
+                }
+            });
         });
 
         filterButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                filterButtons.forEach(btn => btn.classList.remove('active'));
-                this.classList.add('active');
-                currentPage = 1; // Reset to first page on category change
-                filterAndPaginateProducts();
+            button.addEventListener('click', (event) => {
+                filterButtons.forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.currentTarget.classList.add('active');
+                currentPage = 1;
+                filterAndRender(true);
             });
         });
 
         productSearchInput.addEventListener('input', () => {
-            currentPage = 1; // Reset to first page on search
-            filterAndPaginateProducts();
+            currentPage = 1;
+            filterAndRender(true);
         });
 
-        document.querySelectorAll('.add-to-cart-btn').forEach(button => {
-            button.onclick = (e) => {
-                const productId = e.currentTarget.dataset.productId;
+        collectionGrid.addEventListener('click', (event) => {
+            const addToCartBtn = event.target.closest('.add-to-cart-btn');
+            const addToWishlistBtn = event.target.closest('.add-to-wishlist-btn');
+
+            if (addToCartBtn) {
+                const productId = addToCartBtn.dataset.id;
                 const product = allProducts.find(p => p.id === productId);
-                if (product && !cart.some(item => item.id === productId)) {
+                const itemInCart = cart.find(item => item.id === productId);
+
+                if (!itemInCart) {
                     cart.push(product);
-                    updateCartCount();
-                    alert(`${product.name} added to cart!`);
-                } else if (product) {
-                    alert(`${product.name} is already in your cart.`);
+                    updateCartDisplay();
+                    addToCartBtn.classList.add('bg-green-500');
+                    addToCartBtn.textContent = 'Added';
+                    addToCartBtn.style.backgroundColor = 'var(--light-hover)';
+                } else {
+                    console.log('Item already in cart.');
                 }
-            };
-        });
+            }
 
-        document.querySelectorAll('.wishlist-btn').forEach(button => {
-            button.onclick = (e) => {
-                const productId = e.currentTarget.dataset.productId;
+            if (addToWishlistBtn) {
+                const productId = addToWishlistBtn.dataset.id;
                 const product = allProducts.find(p => p.id === productId);
-                const icon = e.currentTarget.querySelector('i');
+                const itemInWishlist = wishlist.find(item => item.id === productId);
 
-                if (product) {
-                    const index = wishlist.findIndex(item => item.id === productId);
-                    if (index > -1) {
-                        wishlist.splice(index, 1);
-                        icon.classList.remove('fa-solid');
-                        icon.classList.add('fa-regular');
-                        alert(`${product.name} removed from wishlist.`);
-                    } else {
-                        wishlist.push(product);
-                        icon.classList.remove('fa-regular');
-                        icon.classList.add('fa-solid');
-                        alert(`${product.name} added to wishlist!`);
-                    }
-                    updateWishlistCount();
+                if (!itemInWishlist) {
+                    wishlist.push(product);
+                    updateWishlistDisplay();
+                    addToWishlistBtn.style.backgroundColor = 'var(--primary-color)';
+                    addToWishlistBtn.style.color = 'white';
+                } else {
+                    wishlist = wishlist.filter(item => item.id !== productId);
+                    updateWishlistDisplay();
+                    addToWishlistBtn.style.backgroundColor = 'transparent';
+                    addToWishlistBtn.style.color = 'var(--primary-color)';
                 }
-            };
+            }
         });
 
-        document.querySelectorAll('.close-button').forEach(button => {
-            button.addEventListener('click', function() {
-                hideAllSections();
-                document.getElementById('home-section').classList.remove('hidden-section');
-            });
+        cartItemsDiv.addEventListener('click', (event) => {
+            const removeBtn = event.target.closest('.remove-from-cart-btn');
+            if (removeBtn) {
+                const productId = removeBtn.dataset.id;
+                cart = cart.filter(item => item.id !== productId);
+                updateCartDisplay();
+            }
         });
 
-        // Footer links to main sections
-        footerAboutLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            hideAllSections();
-            document.getElementById('about-details').classList.remove('hidden-section');
-            document.getElementById('about-details').scrollIntoView({ behavior: 'smooth' });
+        wishlistItemsDiv.addEventListener('click', (event) => {
+            const removeBtn = event.target.closest('.remove-from-wishlist-btn');
+            if (removeBtn) {
+                const productId = removeBtn.dataset.id;
+                wishlist = wishlist.filter(item => item.id !== productId);
+                updateWishlistDisplay();
+            }
         });
 
-        footerFeaturesLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            hideAllSections();
-            document.getElementById('features-details').classList.remove('hidden-section');
-            document.getElementById('features-details').scrollIntoView({ behavior: 'smooth' });
+        document.addEventListener('DOMContentLoaded', () => {
+            filterAndRender();
+            updateCartDisplay();
+            updateWishlistDisplay();
+            startSlideshow();
         });
-
-        footerFoundersLink.addEventListener('click', function(e) {
-            e.preventDefault();
-            hideAllSections();
-            document.getElementById('about-details').classList.remove('hidden-section');
-            document.getElementById('founders-section').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        // Initial render
-        updateCartCount();
-        updateWishlistCount();
-        filterAndPaginateProducts(); // Initial render of products and pagination
-        hideAllSections();
-        document.getElementById('home-section').classList.remove('hidden-section');
     </script>
 </body>
 </html>
